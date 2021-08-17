@@ -5,7 +5,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-int main() {
+int main(void) {
 	pid_t brat;
 	int x;
 	brat = fork();

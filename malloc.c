@@ -5,7 +5,7 @@
 
 int main() {
 	char *p;
-	const int len = 10;
+	const int len = 20;
 	p = (char *)malloc(len * sizeof(char));
 	if (p == NULL) {
 		fprintf(stderr, "Insufficient memory\n");
