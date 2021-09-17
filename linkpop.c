@@ -77,10 +77,15 @@ int main(void) {
 
 	if (push(&head, 11) == 1) {
 		fprintf(stderr, "Could not push to linked list\n");
+		free(head->next);
+		free(head);
 		return 1;
 	}
 	if (push(&head, 22) == 1) {
 		fprintf(stderr, "Could not push to linked list\n");
+		free(head->next->next);
+		free(head->next);
+		free(head);
 		return 1;
 	}
 	
