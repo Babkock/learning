@@ -1,8 +1,8 @@
 /* Vertical writing with curses
- * 23 December, 2011 */
+ * December 23, 2011 */
 #include <ncurses.h>
 
-int main() {
+int main(void) {
     WINDOW *w = initscr();
     int x, y, a, b = 0, c = 0;
     getmaxyx(w, y, x);
@@ -34,3 +34,4 @@ int main() {
     endwin();
     return 0;
 }
+

@@ -1,6 +1,7 @@
-/* Evens and odds by Tanner Babcock
- * July 29, 2010 */
+/* Evens and odds
+ * July 29, 2010, updated September 2021 */
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(int argc, char *argv[]) {
 	int w, x;
@@ -16,3 +17,4 @@ int main(int argc, char *argv[]) {
 	fclose(z);
 	return 0;
 }
+

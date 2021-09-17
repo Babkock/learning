@@ -3,7 +3,7 @@
  * cc prog.c -lncurses */
 #include <ncurses.h>
 
-int main() {
+int main(void) {
 	initscr();
 	int x, y;
 	char passwd[20];

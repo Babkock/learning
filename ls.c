@@ -8,7 +8,8 @@ void ls(char path[])
 {
 	DIR *x = opendir(path);
 	struct dirent *y = NULL;
-	while ((y = readdir(x))) printf("%s\n", y->d_name);
+	while ((y = readdir(x)))
+		printf("%s\n", y->d_name);
 	closedir(x);
 }
 
@@ -20,3 +21,4 @@ int main(int argc, char *argv[]) {
 	ls(argv[1]);
 	return 0;
 }
+

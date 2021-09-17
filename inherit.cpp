@@ -1,4 +1,5 @@
-// class inheritance example
+/* Class inheritance
+ * Probably 2011, updated September 2021 */
 #include <iostream>
 using namespace std;
 
@@ -33,7 +34,7 @@ int main(void) {
 	trgl.setValues(4, 5);
 	cout << rect.area() << endl;
 	cout << trgl.area() << endl;
-	rect.setwh(2, 3);
+	rect.setValues(2, 3);
 	cout << rect.area() << endl;
 	return 0;
 }

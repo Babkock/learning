@@ -1,16 +1,17 @@
-/* Classes example by Tanner Babcock
- * August 5, 2011 (took you long enough) */
+/* Classes example
+ * August 5, 2011 (took you long enough), updated September 2021 */
 #include <iostream>
+using namespace std;
 
 class foo {
 	public:
 	int x;
 	void greet(void) {
-		std::cout << "Welcome!\n";
+		cout << "Welcome!" << endl;
 	}
 	void hello(void) {
 		setnum(55);
-		std::cout << "The number is " << x << "\n";
+		cout << "The number is " << x << endl;
 	}
 	private:
 	void setnum(int y) {
@@ -21,21 +22,22 @@ class foo {
 class tin {
 	public:
 	void herp(void) {
-		std::cout << "Pink Flo";
+		cout << "Pink Flo";
 	}
 	void derp(void) {
-		std::cout << "yd Rules\n";
+		cout << "yd Rules" << endl;
 	}
 } can;
 
-int main() {
+int main(void) {
 	foo bar;
 	tin can;
 	bar.greet();
 	bar.hello();
 	bar.x += 10;
-	std::cout << "The number is now " << bar.x << "\n";
+	cout << "The number is now " << bar.x << endl;
 	can.herp();
 	can.derp();
 	return 0;
 }
+

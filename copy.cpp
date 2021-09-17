@@ -6,7 +6,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 	if (!argv[1]) {
-		cerr << "USAGE: " << argv[0] << " [inputfile] [outputfile]\n";
+		cerr << "USAGE: " << argv[0] << " [inputfile] [outputfile]" << endl;
 		return 1;
 	}
 	// ifstream in(argv[1]);
@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
 	in.open(argv[1]);	
 
 	if (!in) {
-		cerr << "ERROR: Null input file\n";
+		cerr << "ERROR: Input file does not exist" << endl;
 		return 2;
 	}
 	// ofstream out(argv[2]);
@@ -25,3 +25,4 @@ int main(int argc, char *argv[]) {
 		out.put(x);
 	return 0;
 }
+

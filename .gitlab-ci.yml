@@ -1,0 +1,38 @@
+image: gcc
+
+build:
+  stage: build
+
+  before_script:
+    - apt update && apt -y install make autoconf
+  script:
+    - g++ -Wall -O2 class.cpp -o class
+    - cc -Wall -O2 client.c -o client
+    - cc -Wall -O2 coffee.c -o coffee
+    - g++ -Wall -O2 copy.cpp -o copy
+    - g++ -Wall -O2 cstring.cpp -o cstring
+    - cc -Wall -O2 curses.c -lncurses -o curses
+    - cc -Wall -O2 digits.c -o digits
+    - cc -Wall -O2 echo.c -o echo
+  artifacts:
+    paths:
+      - class
+      - client
+      - coffee
+      - copy
+      - cstring
+      - curses
+      - digits
+      - echo
+  cache:
+    paths:
+      - "*.o"
+      - evens
+      - odds
+
+# run tests using the binary built before
+test:
+  stage: test
+  script:
+    - ./class
+
