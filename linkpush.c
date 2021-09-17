@@ -1,4 +1,4 @@
-/* Push and pop linked list
+/* Linked list with push
  * September 15, 2021 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,8 +18,8 @@ void print_list(node_t *h) {
 }
 
 /* Push a node to the end of the list with value val */
-void push(node_t *head, int v) {
-	node_t *current = head;
+void push(node_t *h, int v) {
+	node_t *current = h;
 	while (current->next != NULL)
 		current = current->next;
 
@@ -32,9 +32,18 @@ void push(node_t *head, int v) {
 int main(void) {
 	node_t *head = NULL;
 	head = (node_t *)malloc(sizeof(node_t));
+	if (!head) {
+		fprintf(stderr, "Could not allocate space for first node\n");
+		return 1;
+	}
 	head->val = 1;
 
 	head->next = (node_t *)malloc(sizeof(node_t));
+	if (head->next == NULL) {
+		fprintf(stderr, "Could not allocate space for second node\n");
+		free(head);
+		return 1;
+	}
 	head->next->val = 2;
 	head->next->next = NULL;
 
@@ -45,6 +54,9 @@ int main(void) {
 	printf("Updated linked list: \n");
 	print_list(head);
 
+	free(head->next->next);
+	free(head->next);
+	free(head);
+
 	return 0;
 }
-

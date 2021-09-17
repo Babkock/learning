@@ -8,9 +8,9 @@ typedef struct node {
 	struct node *next;
 } node_t;
 
-/* Print the linked list starting at *head */
-void print_list(node_t *head) {
-	node_t *current = head;
+/* Print the linked list starting at *h */
+void print_list(node_t *h) {
+	node_t *current = h;
 
 	while (current != NULL) {
 		printf("%x = %d\n", &current->val, current->val); // address of value
