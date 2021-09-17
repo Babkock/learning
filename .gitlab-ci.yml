@@ -14,6 +14,20 @@ build:
     - cc -Wall -O2 curses.c -lncurses -o curses
     - cc -Wall -O2 digits.c -o digits
     - cc -Wall -O2 echo.c -o echo
+    - cc -Wall -O2 evensodds.c -o evensodds
+    - cc -Wall -O2 fork.c -o fork
+    - cc -Wall -O2 func.c -o func
+    - cc -Wall -O2 funcpointer.c -o funcpointer
+    - cc -Wall -O2 head.c -o head
+    - g++ -Wall -O2 inherit.cpp -o inherit
+    - cc -Wall -O2 linklist.c -o linklist
+    - cc -Wall -O2 linkpop.c -o linkpop
+    - cc -Wall -O2 linkpush.c -o linkpush
+    - cc -Wall -O2 loops.c -o loops
+    - cc -Wall -O2 ls.c -o ls
+    - cc -Wall -O2 malloc.c -o malloc
+    - cc -Wall -O2 multiserver.c -o multiserver
+    - cc -Wall -O2 outfx.c -o outfx
   artifacts:
     paths:
       - class
@@ -24,6 +38,20 @@ build:
       - curses
       - digits
       - echo
+      - evensodds
+      - fork
+      - func
+      - funcpointer
+      - head
+      - inherit
+      - linklist
+      - linkpop
+      - linkpush
+      - loops
+      - ls
+      - malloc
+      - multiserver
+      - outfx
   cache:
     paths:
       - "*.o"
@@ -35,4 +63,8 @@ test:
   stage: test
   script:
     - ./class
+    - echo 5 | ./coffee
+    - ./copy copy.cpp shit.txt
+    - ./cstring
+    - echo "fuck29" | ./digits
 

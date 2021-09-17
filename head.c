@@ -1,5 +1,5 @@
 /* Linux head clone
- * Tanner Babcock, June 21, 2012 */
+ * June 21, 2012 */
 #include <stdio.h>
 #include <stdbool.h>
 #define printUsage(x) \
