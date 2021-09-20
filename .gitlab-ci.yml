@@ -65,6 +65,6 @@ test:
     - ./class
     - echo 5 | ./coffee
     - ./copy copy.cpp shit.txt
-    - ./cstring
+    - echo "size 5" | ./cstring
     - echo "fuck29" | ./digits
 

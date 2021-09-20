@@ -63,6 +63,8 @@ int main(void) {
 			close(newsockfd);
 		}
 	} /* while (1) */
+
+	return 0;
 }
 
 int handler(int sock) {

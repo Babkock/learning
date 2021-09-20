@@ -1,5 +1,6 @@
 /* Vertical writing with curses
  * December 23, 2011 */
+/* Compile with -lncurses */
 #include <ncurses.h>
 
 int main(void) {
