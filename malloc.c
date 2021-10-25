@@ -1,15 +1,14 @@
-/* malloc example
- * USE THIS AS A MOTHERFUCKING RESOURCE */
+/* malloc example */
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int main(void) {
 	char *p;
 	const int len = 20;
 	p = (char *)malloc(len * sizeof(char));
 	if (p == NULL) {
 		fprintf(stderr, "Insufficient memory\n");
-		return EXIT_FAILURE;
+		return 1;
 	}
 	else {
 		printf("Enter a string: ");
@@ -19,5 +18,6 @@ int main() {
 		free(p);
 		p = NULL;
 	}
-	return EXIT_SUCCESS;
+	return 0;
 }
+

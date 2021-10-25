@@ -4,7 +4,7 @@
 #include <X11/Xlib.h>
 #include <stdio.h>
  
-int main() {
+int main(void) {
 	Display *d = XOpenDisplay(NULL);
 	Window w;
 	XEvent e;

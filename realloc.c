@@ -1,5 +1,5 @@
 /* True dynamic memory allocation
- * Tanner Babcock, June 16th 2012 */
+ * June 16th 2012 */
 #include <stdio.h>
 #include <stdlib.h>
 
