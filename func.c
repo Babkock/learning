@@ -1,4 +1,4 @@
-/* Functions example by Tanner Babcock
+/* Functions example
  * July 29, 2010 */
 #include <stdio.h>
 #include <stdlib.h>

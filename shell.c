@@ -1,4 +1,4 @@
-/* Simple shell by Tanner Babcock
+/* Simple shell
  * September 18, 2010 */
 #include <stdio.h>
 #include <stdlib.h>

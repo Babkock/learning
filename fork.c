@@ -1,4 +1,4 @@
-/* fork example by Tanner Babcock
+/* fork example
  * March 1, 2011 */
 #include <stdio.h>
 #include <unistd.h>

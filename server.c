@@ -9,6 +9,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 
+/* run this in one window, and client.c in another */
 int main(void) {
 	int sockfd, newsockfd, portno, clilen;
 	char buffer[256];

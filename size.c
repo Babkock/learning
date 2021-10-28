@@ -1,4 +1,4 @@
-/* File size counter by Tanner Babcock
+/* File size counter
  * August 27, 2010, updated July 25, 2011 */
 #include <stdio.h>
 #include <stdlib.h>
