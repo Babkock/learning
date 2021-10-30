@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <signal.h>
 #include <unistd.h>
 #include <netdb.h>
 #include <netinet/in.h>
@@ -12,13 +13,17 @@
 
 #define BUF 256
 #define PORT 5001
-int handler(int sock);
+int handler(int sock, const char *msg);
+void interrupt(int sig);
 
 int main(void) {
 	int sockfd, newsockfd, portno, clilen;
-	char buffer[BUF];
+	char buffer[BUF], response[BUF];
 	struct sockaddr_in serv_addr, cli_addr;
 	int n, pid;
+
+	signal(SIGINT, interrupt);
+	signal(SIGABRT, interrupt);
 
 	/* first call to socket() */
 	if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -26,9 +31,14 @@ int main(void) {
 		return 1;
 	}
 
+	printf("Enter a response to connecting clients: ");
+	fgets(response, BUF, stdin);
+
 	/* initialize socket structure */
 	bzero((char *)&serv_addr, sizeof(serv_addr));
 	portno = PORT;
+
+	printf("Listening for clients\n");
 
 	serv_addr = (struct sockaddr_in){ .sin_family = AF_INET, .sin_addr.s_addr = INADDR_ANY, .sin_port = htons(portno) };
 
@@ -57,7 +67,7 @@ int main(void) {
 		if (pid == 0) {
 			/* this is the client process */
 			close(sockfd);
-			return handler(newsockfd);
+			return handler(newsockfd, response);
 		}
 		else {
 			close(newsockfd);
@@ -67,7 +77,7 @@ int main(void) {
 	return 0;
 }
 
-int handler(int sock) {
+int handler(int sock, const char *msg) {
 	int n;
 	char buffer[BUF];
 	bzero(buffer, BUF);
@@ -78,11 +88,16 @@ int handler(int sock) {
 		return 1;
 	}
 	printf("Here is the message: %s\n", buffer);
-	if ((n = write(sock, "I got your message", 18)) < 0) {
+	if ((n = write(sock, msg, strlen(msg))) < 0) {
 		fprintf(stderr, "Error writing to socket\n");
 		return 1;
 	}
 
 	return 0;
+}
+
+void interrupt(int sig) {
+	printf("Done listening\n");
+	exit(0);
 }
 

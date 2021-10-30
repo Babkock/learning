@@ -2,10 +2,6 @@
  * June 21, 2012 */
 #include <stdio.h>
 #include <stdbool.h>
-#define printUsage(x) \
-	fprintf(stderr, "USAGE: %s [ -x ] [file]\n", argv[0]); \
-	fprintf(stderr, "Where x = number of lines\n"); \
-	return x \
 
 int main(int argc, char *argv[]) {
 	bool nofile = false;

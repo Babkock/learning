@@ -1,5 +1,6 @@
 /* TCP server
  * August 15, 2021 */
+/* Use with client.c */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,10 +10,13 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 
+#define BUF 256
+#define PORT 5001
+
 /* run this in one window, and client.c in another */
 int main(void) {
 	int sockfd, newsockfd, portno, clilen;
-	char buffer[256];
+	char buffer[BUF];
 	struct sockaddr_in serv_addr, cli_addr;
 	int n;
 
@@ -24,7 +28,7 @@ int main(void) {
 
 	/* initialize socket structure */
 	bzero((char *)&serv_addr, sizeof(serv_addr));
-	portno = 5001;
+	portno = PORT;
 
 	serv_addr.sin_family = AF_INET;
 	serv_addr.sin_addr.s_addr = INADDR_ANY;
