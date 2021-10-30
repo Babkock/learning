@@ -33,6 +33,8 @@ build:
     - cc -Wall -O2 racecar.c -o racecar
     - cc -Wall -O2 read.c -o read
     - g++ -Wall -O2 read.cpp -o readpp
+    - cc -Wall -O2 speak.c -o speak
+    - cc -Wall -O2 tick.c -o tick
   artifacts:
     paths:
       - class
@@ -62,6 +64,8 @@ build:
       - racecar
       - read
       - readpp
+      - speak
+      - tick
   cache:
     paths:
       - "*.o"
