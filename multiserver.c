@@ -18,9 +18,9 @@ void interrupt(int sig);
 
 int main(void) {
 	int sockfd, newsockfd, portno, clilen;
-	char buffer[BUF], response[BUF];
+	char response[BUF];
 	struct sockaddr_in serv_addr, cli_addr;
-	int n, pid;
+	int pid;
 
 	signal(SIGINT, interrupt);
 	signal(SIGABRT, interrupt);

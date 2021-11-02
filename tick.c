@@ -17,7 +17,6 @@ int main(void) {
 	int num, fd;
 
 	mknod(FIFO_NAME, S_IFIFO | 0666, 0);
-
 	printf("Waiting for writers\n");
 	fd = open(FIFO_NAME, O_RDONLY);
 	printf("Got a writer\n");
@@ -27,9 +26,10 @@ int main(void) {
 			perror("read");
 		else {
 			s[num] = '\0';
-			printf("Tick: Read %d bytes: \"%s\"\n", num, s);
+			printf("Tick: Read %d bytes: %s", num, s);
 		}
-	} while (num > 0);
+	} while (num > 1);
+	putchar('\n');
 
 	return 0;
 }

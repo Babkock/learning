@@ -28,7 +28,7 @@ build:
     - cc -Wall -O2 malloc.c -o malloc
     - cc -Wall -O2 multiserver.c -o multiserver
     - cc -Wall -O2 outfx.c -o outfx
-    - cc -Wall -O2 password.c -o password
+    - cc -Wall -O2 password.c -lncurses -o password
     - cc -Wall -O2 pipe.c -o pipe
     - cc -Wall -O2 racecar.c -o racecar
     - cc -Wall -O2 read.c -o read

@@ -21,7 +21,7 @@ int main(void) {
 	printf("Waiting for readers\n");
 	fd = open(FIFO_NAME, O_WRONLY);
 	printf("Got a reader - type some stuff\n");
-	while (gets(s), !feof(stdin)) {
+	while (strcmp(fgets(s, sizeof(s), stdin), "\n") != 0) {
 		if ((num = write(fd, s, strlen(s))) == -1)
 			perror("write");
 		else
