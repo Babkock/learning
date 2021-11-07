@@ -40,11 +40,11 @@ int main(void) {
 		return 2;
 	}
 
-	// now start listening for clients
+	/* now start listening for clients */
 	listen(sockfd, 5);
 	clilen = sizeof(cli_addr);
 
-	// accept connection
+	/* accept connection */
 	newsockfd = accept(sockfd, (struct sockaddr *)&cli_addr, &clilen);
 	if (newsockfd < 0) {
 		fprintf(stderr, "Error on accept()\n");
@@ -73,3 +73,4 @@ int main(void) {
 	}
 	return 0;
 }
+

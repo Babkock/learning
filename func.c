@@ -19,7 +19,8 @@ int main(int argc, char *argv[]) {
 		printf("Number: ");
 		scanf("%d", &x);
 	}
-	if (argv[1]) x = atoi(argv[1]);
+	else
+		x = atoi(argv[1]);
 	int y = sqar(x);
 	int z = cube(x);
 
