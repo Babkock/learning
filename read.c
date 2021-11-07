@@ -20,6 +20,6 @@ int main(int argc, char *argv[]) {
 			putchar(y);
 		fclose(in);
 	}
-	fclose(in);
 	return 0;
 }
+

@@ -21,14 +21,16 @@ void print_list(node_t *h) {
 int main(void) {
 	node_t *head = NULL;
 	head = (node_t *)malloc(sizeof(node_t));
-	if (head == NULL) {
+	if (!head) {
+		fprintf(stderr, "Could not allocate space for first node\n");
 		return 1;
 	}
 
 	head->val = 80;
 
 	head->next = (node_t *)malloc(sizeof(node_t));
-	if (head->next == NULL) {
+	if (!head->next) {
+		fprintf(stderr, "Could not allocate space for the second node\n");
 		return 1;
 	}
 	head->next->val = 90;

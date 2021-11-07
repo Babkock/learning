@@ -1,6 +1,5 @@
 /* Function pointers
- * August 17, 2021
-*/
+ * August 17, 2021 */
 #include <stdio.h>
 #define MAX 256
 

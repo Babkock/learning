@@ -64,7 +64,7 @@ int main(void) {
 	head->val = 64;
 
 	head->next = (node_t *)malloc(sizeof(node_t));
-	if (head->next == NULL) {
+	if (!head->next) {
 		fprintf(stderr, "Could not allocate space for second node\n");
 		free(head);
 		return 1;
