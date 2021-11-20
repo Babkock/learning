@@ -87,7 +87,7 @@ int handler(int sock, const char *msg) {
 		fprintf(stderr, "Error reading from socket\n");
 		return 1;
 	}
-	printf("Here is the message: %s\n", buffer);
+	printf("Here is the message: %s", buffer);
 	if ((n = write(sock, msg, strlen(msg))) < 0) {
 		fprintf(stderr, "Error writing to socket\n");
 		return 1;

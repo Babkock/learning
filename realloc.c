@@ -7,7 +7,7 @@ int main(void) {
 	char *buffer = (char *)malloc(sizeof(char));
 	char x;
 	int i = 0, y;
-	while ((x = getchar()) != EOF) {
+	while ((x = getchar()) != '\n') {
 		buffer[i] = x;
 		i++;
 		buffer[i] = (int)realloc(buffer, sizeof(char));
@@ -16,6 +16,7 @@ int main(void) {
 	for (y = 0; y < i; y++) {
 		putchar(buffer[y]);
 	}
+	putchar('\n');
 	free(buffer);
 	printf("The size of your string is %d\n", y);
 	return 0;

@@ -15,5 +15,7 @@ int main(int argc, char *argv[]) {
 	char x;
 	while (cin.get(x))	// fails on EOF
 		out.put(x);
+	out.close();
 	return 0;
 }
+

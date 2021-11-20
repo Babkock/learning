@@ -73,7 +73,7 @@ int main(int argc, char **argv) {
 		return 5;
 	}
 
-	printf("Your message: %s\n", buffer);
+	printf("Your message: %s", buffer);
 	return 0;
 }
 

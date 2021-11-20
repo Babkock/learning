@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 	int a, b, e = 0, f;
 	FILE *c;
 	char *d;
-	if ((d = malloc(100 * sizeof(char))) == NULL) {
+	if ((d = (char *)malloc(100 * sizeof(char))) == NULL) {
 		fprintf(stderr, "Insufficient memory\n");
 		return 3;
 	}

@@ -36,6 +36,10 @@ int main(int argc, char *argv[]) {
 			cur++;
 		putchar(x);
 	}
+	if (!nofile) {
+		fclose(in);
+	}
 	
 	return 0;
 }
+
