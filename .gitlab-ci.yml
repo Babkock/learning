@@ -30,6 +30,7 @@ build:
     - cc -Wall -O2 io/strings.c -o io/strings
     - cc -Wall -O2 io/write.c -o io/write
     - cc -Wall -O2 network/client.c -o network/client
+    - cc -Wall -O2 network/hostname.c -o network/hostname
     - cc -Wall -O2 network/multiserver.c -o network/multiserver
     - cc -Wall -O2 network/server.c -o network/server
     - cc -Wall -O2 point/funcpointer.c -o point/funcpointer
@@ -76,6 +77,7 @@ build:
       - io/strings
       - io/write
       - network/client
+      - network/hostname
       - network/multiserver
       - network/server
       - point/funcpointer

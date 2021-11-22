@@ -16,7 +16,8 @@
 int handler(int sock, const char *msg);
 void interrupt(int sig);
 
-int main(void) {
+/* server response can be supplied on command line */
+int main(int argc, char *argv[]) {
 	int sockfd, newsockfd, portno, clilen;
 	char response[BUF];
 	struct sockaddr_in serv_addr, cli_addr;
@@ -31,8 +32,15 @@ int main(void) {
 		return 1;
 	}
 
-	printf("Enter a response to connecting clients: ");
-	fgets(response, BUF, stdin);
+	if (argc < 2) {
+		printf("Enter a response to connecting clients: ");
+		fgets(response, BUF, stdin);
+	}
+	else {
+		for (int i = 1; i < argc; i++) {
+			sprintf(response, "%s%s%c", response, argv[i], (i != (argc-1)) ? ' ' : '\n');
+		}
+	}
 
 	/* initialize socket structure */
 	bzero((char *)&serv_addr, sizeof(serv_addr));
