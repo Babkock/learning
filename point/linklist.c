@@ -38,6 +38,7 @@ int main(void) {
 	print_list(head);
 	free(head->next);
 	free(head);
+	head = NULL;
 	return 0;
 }
 

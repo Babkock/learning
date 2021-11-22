@@ -11,7 +11,7 @@ int main() {
 	Window w;
 	XEvent e;
 	int s;
-	char *a, *b;
+	char *a, *b = "";
 	if (d == NULL) {
 		printf("ERROR: Cannot open display\n");
 		return 1;

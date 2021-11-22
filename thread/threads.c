@@ -9,7 +9,7 @@
 void printHello(void *threadid) {
 	long tid;
 	tid = (long)threadid;
-	printf("Hello world! Thread id: %d\n", tid);
+	printf("Hello world! Thread id: %ld\n", tid);
 	pthread_exit(NULL);
 }
 
@@ -27,3 +27,4 @@ int main(void) {
 	pthread_exit(NULL);
 	return 0;
 }
+

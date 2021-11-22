@@ -42,6 +42,7 @@ int main(void) {
 	if (!head->next) {
 		fprintf(stderr, "Could not allocate space for second node\n");
 		free(head);
+		head = NULL;
 		return 1;
 	}
 	head->next->val = 2;
@@ -57,6 +58,7 @@ int main(void) {
 	free(head->next->next);
 	free(head->next);
 	free(head);
-
+	head = NULL;
 	return 0;
 }
+

@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
         printf("%s$ ", y);
         fgets(x, sizeof(x), stdin);
         if (x[0] == 'c' && x[1] == 'd' && x[2] == ' ') {
-            sscanf(x, "cd %s", &z);
+            sscanf(x, "cd %s", z);
             chdir(z);
         }
         else if (strcmp(x, "exit\n") == 0) break;
@@ -21,3 +21,4 @@ int main(int argc, char *argv[]) {
     }
     return 0;
 }
+
