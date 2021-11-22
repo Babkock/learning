@@ -10,7 +10,7 @@ int main(void) {
 	XEvent e;
 	int s;
 	if (d == NULL) {
-		printf("ERROR: Cannot open display\n");
+		fprintf(stderr, "ERROR: Cannot open display\n");
 		return 1;
 	}
 	s = DefaultScreen(d);

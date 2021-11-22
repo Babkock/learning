@@ -12,7 +12,7 @@ int digits(const char *p) {
 	return x;
 }
 
-int main() {
+int main(void) {
 	int x;
 	char y[256];
 	printf("Enter a string: ");

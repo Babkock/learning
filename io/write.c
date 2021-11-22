@@ -7,10 +7,11 @@ int main(int argc, char *argv[]) {
 		printf("USAGE: %s [output]\n", argv[0]);
 		return 1;
 	}
-	FILE *out = (fopen(argv[1], "w"));
+	FILE *out = fopen(argv[1], "w");
 	int x;
 	while ((x = getchar()) != EOF)
 		fputc(x, out);
 	fclose(out);
 	return 0;
 }
+

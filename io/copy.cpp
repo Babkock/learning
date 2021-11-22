@@ -23,6 +23,9 @@ int main(int argc, char *argv[]) {
 	char x;
 	while (in.get(x))
 		out.put(x);
+
+	out.close();
+	in.close();
 	return 0;
 }
 

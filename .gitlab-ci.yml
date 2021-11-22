@@ -6,81 +6,107 @@ build:
   before_script:
     - apt update && apt -y install make autoconf
   script:
-    - g++ -Wall -O2 class.cpp -o class
-    - cc -Wall -O2 client.c -o client
-    - cc -Wall -O2 coffee.c -o coffee
-    - g++ -Wall -O2 copy.cpp -o copy
-    - g++ -Wall -O2 cstring.cpp -o cstring
-    - cc -Wall -O2 curses.c -lncurses -o curses
-    - cc -Wall -O2 digits.c -o digits
-    - cc -Wall -O2 echo.c -o echo
-    - cc -Wall -O2 evensodds.c -o evensodds
-    - cc -Wall -O2 fork.c -o fork
-    - cc -Wall -O2 func.c -o func
-    - cc -Wall -O2 funcpointer.c -o funcpointer
-    - cc -Wall -O2 head.c -o head
-    - g++ -Wall -O2 inherit.cpp -o inherit
-    - cc -Wall -O2 linklist.c -o linklist
-    - cc -Wall -O2 linkpop.c -o linkpop
-    - cc -Wall -O2 linkpush.c -o linkpush
-    - cc -Wall -O2 loops.c -o loops
-    - cc -Wall -O2 ls.c -o ls
-    - cc -Wall -O2 malloc.c -o malloc
-    - cc -Wall -O2 multiserver.c -o multiserver
-    - cc -Wall -O2 mutex.c -o mutex
-    - cc -Wall -O2 outfx.c -o outfx
-    - cc -Wall -O2 password.c -lncurses -o password
-    - cc -Wall -O2 pipe.c -o pipe
-    - cc -Wall -O2 racecar.c -o racecar
-    - cc -Wall -O2 read.c -o read
-    - g++ -Wall -O2 read.cpp -o readpp
-    - cc -Wall -O2 speak.c -o speak
-    - cc -Wall -O2 tick.c -o tick
+    - g++ -Wall -O2 etc/class.cpp -o etc/class
+    - cc -Wall -O2 etc/curses.c -lncurses -o etc/curses
+    - cc -Wall -O2 etc/func.c -o etc/func
+    - g++ -Wall -O2 etc/inherit.cpp -o etc/inherit
+    - cc -Wall -O2 etc/outfx.c -o etc/outfx
+    - cc -Wall -O2 etc/password.c -lncurses -o etc/password
+    - cc -Wall -O2 etc/xhello.c -L/usr/X11/lib -lX11 -o etc/xhello
+    - cc -Wall -O2 etc/xkeys.c -L/usr/X11/lib -lX11 -o etc/xkeys
+    - cc -Wall -O2 io/coffee.c -o io/coffee
+    - g++ -Wall -O2 io/copy.cpp -o io/copy
+    - g++ -Wall -O2 io/cstring.cpp -o io/cstring
+    - cc -Wall -O2 io/digits.c -o io/digits
+    - cc -Wall -O2 io/echo.c -o io/echo
+    - cc -Wall -O2 io/evensodds.c -o io/evensodds
+    - cc -Wall -O2 io/head.c -o io/head
+    - cc -Wall -O2 io/loops.c -o io/loops
+    - g++ -Wall -O2 io/minmax.cpp -o io/minmax
+    - cc -Wall -O2 io/racecar.c -o io/racecar
+    - cc -Wall -O2 io/read.c -o io/read
+    - cc -Wall -O2 io/size.c -o io/size
+    - cc -Wall -O2 io/spaces.c -o io/spaces
+    - cc -Wall -O2 io/strings.c -o io/strings
+    - cc -Wall -O2 io/write.c -o io/write
+    - cc -Wall -O2 network/client.c -o network/client
+    - cc -Wall -O2 network/multiserver.c -o network/multiserver
+    - cc -Wall -O2 network/server.c -o network/server
+    - cc -Wall -O2 point/funcpointer.c -o point/funcpointer
+    - cc -Wall -O2 point/linklist.c -o point/linklist
+    - cc -Wall -O2 point/linkpop.c -o point/linkpop
+    - cc -Wall -O2 point/linkpush.c -o point/linkpush
+    - cc -Wall -O2 point/malloc.c -o point/malloc
+    - cc -Wall -O2 point/realloc.c -o point/realloc
+    - cc -Wall -O2 point/structfunc.c -o point/structfunc
+    - cc -Wall -O2 sys/fork.c -o sys/fork
+    - cc -Wall -O2 sys/ls.c -o sys/ls
+    - cc -Wall -O2 sys/pid.c -o sys/pid
+    - cc -Wall -O2 sys/pipe.c -o sys/pipe
+    - cc -Wall -O2 sys/shell.c -o sys/shell
+    - cc -Wall -O2 sys/speak.c -o sys/speak
+    - cc -Wall -O2 sys/tick.c -o sys/tick
+    - cc -Wall -O2 thread/condsignal.c -lpthread -o thread/condsignal
+    - cc -Wall -O2 thread/mutex.c -lpthread -o thread/mutex
+    - cc -Wall -O2 thread/threads.c -lpthread -o thread/threads
+    - g++ -Wall -O2 time.cpp -o time
   artifacts:
     paths:
-      - class
-      - client
-      - coffee
-      - copy
-      - cstring
-      - curses
-      - digits
-      - echo
-      - evensodds
-      - fork
-      - func
-      - funcpointer
-      - head
-      - inherit
-      - linklist
-      - linkpop
-      - linkpush
-      - loops
-      - ls
-      - malloc
-      - multiserver
-      - mutex
-      - outfx
-      - password
-      - pipe
-      - racecar
-      - read
-      - readpp
-      - speak
-      - tick
+      - etc/class
+      - etc/curses
+      - etc/func
+      - etc/inherit
+      - etc/outfx
+      - etc/password
+      - etc/xhello
+      - etc/xkeys
+      - io/coffee
+      - io/copy
+      - io/cstring
+      - io/digits
+      - io/echo
+      - io/evensodds
+      - io/head
+      - io/loops
+      - io/minmax
+      - io/racecar
+      - io/read
+      - io/size
+      - io/spaces
+      - io/strings
+      - io/write
+      - network/client
+      - network/multiserver
+      - network/server
+      - point/funcpointer
+      - point/linklist
+      - point/linkpop
+      - point/linkpush
+      - point/malloc
+      - point/realloc
+      - point/structfunc
+      - sys/fork
+      - sys/ls
+      - sys/pid
+      - sys/pipe
+      - sys/shell
+      - sys/speak
+      - sys/tick
+      - thread/condsignal
+      - thread/mutex
+      - thread/threads
   cache:
     paths:
       - "*.o"
-      - evens
-      - odds
+      - io/evens
+      - io/odds
 
 # run tests using the binary built before
 test:
   stage: test
   script:
-    - ./class
-    - echo 5 | ./coffee
-    - ./copy copy.cpp shit.txt
-    - echo "size 5" | ./cstring
-    - echo "fuck29" | ./digits
-
+    - ./etc/class
+    - echo 5 | ./io/coffee
+    - ./io/copy io/copy.cpp shit.txt
+    - echo "size 5" | ./io/cstring
+    - echo "fuck29" | ./io/digits
