@@ -27,6 +27,7 @@ build:
     - cc -Wall -O2 ls.c -o ls
     - cc -Wall -O2 malloc.c -o malloc
     - cc -Wall -O2 multiserver.c -o multiserver
+    - cc -Wall -O2 mutex.c -o mutex
     - cc -Wall -O2 outfx.c -o outfx
     - cc -Wall -O2 password.c -lncurses -o password
     - cc -Wall -O2 pipe.c -o pipe
@@ -58,6 +59,7 @@ build:
       - ls
       - malloc
       - multiserver
+      - mutex
       - outfx
       - password
       - pipe
