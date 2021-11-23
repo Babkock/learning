@@ -79,6 +79,7 @@ int main(void) {
 		fprintf(stderr, "Could not push to linked list\n");
 		free(head->next);
 		free(head);
+		head = NULL;
 		return 1;
 	}
 	if (push(&head, 22) == 1) {
@@ -86,6 +87,7 @@ int main(void) {
 		free(head->next->next);
 		free(head->next);
 		free(head);
+		head = NULL;
 		return 1;
 	}
 	
@@ -99,6 +101,7 @@ int main(void) {
 
 	free(head->next);
 	free(head);
-
+	head = NULL;
 	return 0;
 }
+
