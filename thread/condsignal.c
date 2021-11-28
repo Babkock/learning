@@ -12,7 +12,7 @@
 int done = 0;
 /* number of threads finished */
 
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 void *entry(void *id);
 
@@ -22,12 +22,12 @@ int main(void) {
 	for (int t = 0; t < THREADS; t++)
 		pthread_create(&threads[t], NULL, entry, (void *)(long)t);
 
-	if (pthread_mutex_init(&mutex, NULL) != 0) {
+	if (pthread_mutex_init(&lock, NULL) != 0) {
 		fprintf(stderr, "Could not initialize mutex\n");
 		return 1;
 	}
 
-	if (pthread_mutex_lock(&mutex) != 0) {
+	if (pthread_mutex_lock(&lock) != 0) {
 		fprintf(stderr, "Could not lock mutex, error %d\n", errno);
 		return 1;
 	}
@@ -38,7 +38,7 @@ int main(void) {
 
 		/* block until another thread signals cond. the Mutex is released
 		 * while blocked, then re-acquired before the call returns */
-		if (pthread_cond_wait(&cond, &mutex) != 0) {
+		if (pthread_cond_wait(&cond, &lock) != 0) {
 			fprintf(stderr, "Could not wait, error %d\n", errno);
 			return 2;
 		}
@@ -46,11 +46,11 @@ int main(void) {
 		printf("Condition was signalled\n");
 	}
 	
-	if (pthread_mutex_unlock(&mutex) != 0) {
+	if (pthread_mutex_unlock(&lock) != 0) {
 		fprintf(stderr, "Could not unlock mutex, error %d\n", errno);
 		return 1;
 	}
-	pthread_mutex_destroy(&mutex);
+	pthread_mutex_destroy(&lock);
 	return 0;
 }
 
@@ -64,7 +64,7 @@ void *entry(void *id) {
 
 	/* acquire mutex from main(), then release back to main() after
 	 * condition is signalled */
-	if (pthread_mutex_lock(&mutex) != 0) {
+	if (pthread_mutex_lock(&lock) != 0) {
 		fprintf(stderr, "Thread %d could not lock mutex, error %d\n", realId, errno);
 		abort();
 	}
@@ -79,7 +79,7 @@ void *entry(void *id) {
 		abort();
 	}
 	
-	if (pthread_mutex_unlock(&mutex) != 0) {
+	if (pthread_mutex_unlock(&lock) != 0) {
 		fprintf(stderr, "Thread %d could not unlock mutex, error %d\n", realId, errno);
 		abort();
 	}

@@ -11,4 +11,5 @@ Very old C and C++ programs, with some new C programs. Goes over a variety of Un
 * [Pthreads](https://gitlab.com/Babkock/learning/-/blob/master/thread/threads.c) with [mutex](https://gitlab.com/Babkock/learning/-/blob/master/thread/mutex.c)
 * [Time calculator](https://gitlab.com/Babkock/learning/-/blob/master/time.c)
 * [Simple shell](https://gitlab.com/Babkock/learning/-/blob/master/sys/shell.c)
+* [Symbolic links](https://gitlab.com/Babkock/learning/-/blog/master/sys/symlink.c)
 
