@@ -9,9 +9,11 @@ build:
     - g++ -Wall -O2 etc/class.cpp -o etc/class
     - cc -Wall -O2 etc/curses.c -lncurses -o etc/curses
     - cc -Wall -O2 etc/func.c -o etc/func
+    - cc -Wall -O2 etc/getch.c -lncurses -o etc/getch
     - g++ -Wall -O2 etc/inherit.cpp -o etc/inherit
     - cc -Wall -O2 etc/outfx.c -o etc/outfx
     - cc -Wall -O2 etc/password.c -lncurses -o etc/password
+    - cc -Wall -O2 etc/window.c -lncurses -o etc/window
     - cc -Wall -O2 etc/xhello.c -L/usr/X11/lib -lX11 -o etc/xhello
     - cc -Wall -O2 etc/xkeys.c -L/usr/X11/lib -lX11 -o etc/xkeys
     - cc -Wall -O2 io/coffee.c -o io/coffee
@@ -56,9 +58,11 @@ build:
       - etc/class
       - etc/curses
       - etc/func
+      - etc/getch
       - etc/inherit
       - etc/outfx
       - etc/password
+      - etc/window
       - etc/xhello
       - etc/xkeys
       - io/coffee
