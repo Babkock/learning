@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int main() {
+int main(void) {
 	Display *d = XOpenDisplay(NULL);
 	Window w;
 	XEvent e;

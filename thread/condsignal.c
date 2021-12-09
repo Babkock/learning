@@ -18,7 +18,7 @@ void *entry(void *id);
 
 int main(void) {
 	printf("Main thread starting\n");
-	pthread_t threads[THREADS];
+	pthread_t *threads = (pthread_t *)malloc(sizeof(pthread_t) * THREADS);
 	for (int t = 0; t < THREADS; t++)
 		pthread_create(&threads[t], NULL, entry, (void *)(long)t);
 
@@ -40,6 +40,7 @@ int main(void) {
 		 * while blocked, then re-acquired before the call returns */
 		if (pthread_cond_wait(&cond, &lock) != 0) {
 			fprintf(stderr, "Could not wait, error %d\n", errno);
+			free(threads);
 			return 2;
 		}
 
@@ -48,9 +49,11 @@ int main(void) {
 	
 	if (pthread_mutex_unlock(&lock) != 0) {
 		fprintf(stderr, "Could not unlock mutex, error %d\n", errno);
+		free(threads);
 		return 1;
 	}
 	pthread_mutex_destroy(&lock);
+	free(threads);
 	return 0;
 }
 
