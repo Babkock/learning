@@ -53,6 +53,8 @@ build:
     - cc -Wall -O2 thread/condsignal.c -lpthread -o thread/condsignal
     - cc -Wall -O2 thread/mutex.c -lpthread -o thread/mutex
     - cc -Wall -O2 thread/threads.c -lpthread -o thread/threads
+    - cc -Wall -O2 hashmap.c -o hashmap
+    - cc -Wall -O2 hashtable.c -o hashtable
     - g++ -Wall -O2 time.cpp -o time
   artifacts:
     paths:
@@ -103,6 +105,8 @@ build:
       - thread/condsignal
       - thread/mutex
       - thread/threads
+      - hashmap
+      - hashtable
   cache:
     paths:
       - "*.o"
