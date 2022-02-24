@@ -4,6 +4,8 @@
 ;    nasm disk.asm -f bin -o disk.bin
 ; And try:
 ;    xxd disk.bin
+; Run with:
+;    qemu-system-i386 -hda disk.bin
 ; Should print '0xDADA' '0xFACE'
 [org 0x7c00]		; BIOS executes instructions at 0x7c00
 	mov bp, 0x8000	; make sure the stack is away
