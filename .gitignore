@@ -1,5 +1,6 @@
 a.out
 *.txt
 pipe.fifo
+*.o
 *.bin
 

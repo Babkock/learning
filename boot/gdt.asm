@@ -120,14 +120,6 @@ init_pm:			; now using 32-bit instructions
 	call print_string_pm
 
 	jmp $
-;	call BEGIN_PM
-;
-;
-;[bits 32]
-;BEGIN_PM:
-;	mov ebx, MSG_PROT_MODE
-;	call print_string_pm
-;	jmp $
 
 CODE_SEG equ gdt_code - gdt_start
 DATA_SEG equ gdt_data - gdt_start

@@ -7,12 +7,12 @@
 ; Run with:
 ;    qemu-system-i386 -hda disk.bin
 ; Should print '0xDADA' '0xFACE'
-[org 0x7c00]		; BIOS executes instructions at 0x7c00
-	mov bp, 0x8000	; make sure the stack is away
+[org 0x7c00]        ; BIOS executes instructions at 0x7c00
+	mov bp, 0x8000  ; make sure the stack is away
 	mov sp, bp
 
-	mov bx, 0x9000	; es:bx = 0x0000:0x9000 = 0x09000
-	mov dh, 2		; read 2 sectors
+	mov bx, 0x9000  ; es:bx = 0x0000:0x9000 = 0x09000
+	mov dh, 2       ; read 2 sectors
 	call disk_load
 
 	mov dx, [0x9000] ; retrieve the first loaded word, 0xdada
@@ -31,13 +31,13 @@ print:
 	pusha
 
 start:
-	mov al, [bx]	; BX <- base address for string
+	mov al, [bx]    ; BX <- base address for string
 	cmp al, 0
 	je done
 
 	; the part where we print with the BIOS help
 	mov ah, 0x0e
-	int 0x10		; AL contains the char
+	int 0x10        ; AL contains the char
 	; increment pointer
 	add bx, 1
 	jmp start
@@ -49,9 +49,9 @@ done:
 print_nl:
 	pusha
 	mov ah, 0x0e
-	mov al, 0x0a	; newline character
+	mov al, 0x0a    ; newline character
 	int 0x10
-	mov al, 0x0d	; carriage return
+	mov al, 0x0d    ; carriage return
 	int 0x10
 
 	popa
@@ -62,15 +62,15 @@ print_nl:
 print_hex:
 	pusha
 
-	mov cx, 0		; CX <- index variable
+	mov cx, 0       ; CX <- index variable
 
 hex_loop:
-	cmp cx, 4		; loop 4 times
+	cmp cx, 4       ; loop 4 times
 	je end
 
-	mov ax, dx		; AX is working register
-	and ax, 0x000f	; 0x1234 -> 0x0004 by masking first three to zeros
-	add al, 0x30	; add 0x30 to N to convert it to ASCII "N"
+	mov ax, dx      ; AX is working register
+	and ax, 0x000f  ; 0x1234 -> 0x0004 by masking first three to zeros
+	add al, 0x30    ; add 0x30 to N to convert it to ASCII "N"
 	cmp al, 0x39
 	jle step2
 	add al, 7
@@ -78,7 +78,7 @@ hex_loop:
 step2:
 	; BX <- base address + string length - index of char
 	mov bx, HEX_OUT + 5
-	sub bx, cx		; CX <- index variable
+	sub bx, cx      ; CX <- index variable
 	mov [bx], al
 	ror dx, 4
 
@@ -103,22 +103,22 @@ disk_load:
 	; the stack
 	push dx
 
-	mov ah, 0x02	; AH <- interrupt function
-	mov al, dh		; AL <- number of sectors to read 01 - 80
-	mov cl, 0x02	; CL <- sector (01 - 11)
-					; 0x01 is boot sector, 0x02 is first available
-	mov ch, 0x00	; CH <- cylinder (0x0 .. 0xff, upper 2 bits in CL)
+	mov ah, 0x02    ; AH <- interrupt function
+	mov al, dh      ; AL <- number of sectors to read 01 - 80
+	mov cl, 0x02    ; CL <- sector (01 - 11)
+	                ; 0x01 is boot sector, 0x02 is first available
+	mov ch, 0x00    ; CH <- cylinder (0x0 .. 0xff, upper 2 bits in CL)
 	; DL <- drive number
 	; 0 = floppy, 1 = floppy2, 0x80 = hdd, 0x81 = hdd2
-	mov dh, 0x00	; DH <- head number (0 - F)
+	mov dh, 0x00    ; DH <- head number (0 - F)
 	
 	; [es:bx] <- pointer to buffer where the data will be stored
 	; caller sets it up for us
-	int 0x13		; BIOS interrupt
-	jc disk_error	; if error
+	int 0x13        ; BIOS interrupt
+	jc disk_error   ; if error
 
 	pop dx
-	cmp al, dh		; BIOS sets AL to the number of sectors read
+	cmp al, dh      ; BIOS sets AL to the number of sectors read
 	jne sectors_error
 	popa
 	ret
@@ -127,7 +127,7 @@ disk_error:
 	mov bx, DISK_ERROR
 	call print
 	call print_nl
-	mov dh, ah		; AH = error code, DL = disk drive that dropped error
+	mov dh, ah      ; AH = error code, DL = disk drive that dropped error
 	call print_hex
 	jmp disk_loop
 
