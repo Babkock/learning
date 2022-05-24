@@ -1,5 +1,6 @@
 /* Fontconfig match
  * January 28, 2022 */
+/* Compile with -lfontconfig */
 #include <stdio.h>
 #include <stdlib.h>
 #include <fontconfig/fontconfig.h>
