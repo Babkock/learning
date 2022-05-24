@@ -4,7 +4,7 @@ build:
   stage: build
 
   before_script:
-    - apt update && apt -y install make autoconf libXft-dev libxcb-dev
+    - apt update && apt -y install make autoconf libxft-dev libxcb-util0-dev
   script:
     - g++ -Wall -O2 etc/class.cpp -o etc/class
     - cc -Wall -O2 etc/curses.c -lncurses -o etc/curses
