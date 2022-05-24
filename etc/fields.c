@@ -1,8 +1,6 @@
 /* Ncurses fields program
  * April 13, 2022
- * How to run:
- *  cc -Wall -o fields fields.c -lform -lncurses
-*/
+ * Compile with -lform -lncurses */
 #include <ncurses.h>
 #include <form.h>
 #include <assert.h>
