@@ -59,7 +59,7 @@ build:
     - cc -Wall -O2 thread/mutex.c -lpthread -o thread/mutex
     - cc -Wall -O2 thread/threads.c -lpthread -o thread/threads
     - cc -Wall -O2 x/events.c -L/usr/X11/lib -lxcb -o x/events
-    - cc -Wall -O2 x/fc.c -lfontconfig x/fc
+    - cc -Wall -O2 x/fc.c -lfontconfig -o x/fc
     - cc -Wall -O2 x/xft.c -lX11 -lXft -lfreetype -I/usr/include/freetype2 -o x/xft
     - cc -Wall -O2 x/xhello.c -L/usr/X11/lib -lX11 -o x/xhello
     - cc -Wall -O2 x/xkeys.c -L/usr/X11/lib -lX11 -o x/xkeys
