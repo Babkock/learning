@@ -12,7 +12,7 @@ int main(void) {
 	Window win;
 	XftFont *font;
 	const char *fontname = "Fura Code Nerd Font:size=14:antialias=true";
-	const FcChar8 *msg = "Hello world\0";
+	const FcChar8 *msg = (const FcChar8 *)"Hello world\0";
 	XftDraw *draw;
 	XftColor color, color2, color3;
 

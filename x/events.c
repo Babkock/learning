@@ -72,7 +72,7 @@ int main(void) {
 		switch (e->response_type & ~0x80) {
 			case XCB_EXPOSE: {
 				xcb_expose_event_t *ev = (xcb_expose_event_t *)e;
-				printf("Window %ld exposed. Region to be redrawn at location (%d,%d)\n", ev->window, ev->x, ev->y);
+				printf("Window %d exposed. Region to be redrawn at location (%d,%d)\n", ev->window, ev->x, ev->y);
 				printf("with dimensions %d x %d\n", ev->width, ev->height);
 				break;
 			}
@@ -82,13 +82,13 @@ int main(void) {
 
 				switch (ev->detail) {
 					case 4:
-						printf("Wheel button up in window %ld, at coords (%d,%d)\n", ev->event, ev->event_x, ev->event_y);
+						printf("Wheel button up in window %d, at coords (%d,%d)\n", ev->event, ev->event_x, ev->event_y);
 						break;
 					case 5:
-						printf("Wheel button down in window %ld, at coords (%d,%d)\n", ev->event, ev->event_x, ev->event_y);
+						printf("Wheel button down in window %d, at coords (%d,%d)\n", ev->event, ev->event_x, ev->event_y);
 						break;
 					default:
-						printf("Button %d pressed in window %ld, at coords (%d,%d)\n", ev->detail, ev->event, ev->event_x, ev->event_y);
+						printf("Button %d pressed in window %d, at coords (%d,%d)\n", ev->detail, ev->event, ev->event_x, ev->event_y);
 						break;
 				}
 				break;
@@ -97,35 +97,35 @@ int main(void) {
 				xcb_button_release_event_t *ev = (xcb_button_release_event_t *)e;
 				print_modifiers(ev->state);
 
-				printf("Button %d released in window %ld, at coords (%d,%d)\n", ev->detail, ev->event, ev->event_x, ev->event_y);
+				printf("Button %d released in window %d, at coords (%d,%d)\n", ev->detail, ev->event, ev->event_x, ev->event_y);
 				break;
 			}
 			case XCB_MOTION_NOTIFY: {
 				xcb_motion_notify_event_t *ev = (xcb_motion_notify_event_t *)e;
 
-				printf("Mouse moved in window %ld, at coords (%d,%d)\n", ev->event, ev->event_x, ev->event_y);
+				printf("Mouse moved in window %d, at coords (%d,%d)\n", ev->event, ev->event_x, ev->event_y);
 				break;
 			}
 			case XCB_ENTER_NOTIFY: {
 				xcb_enter_notify_event_t *ev = (xcb_enter_notify_event_t *)e;
-				printf("Mouse entered window %ld, at coords (%d,%d)\n", ev->event, ev->event_x, ev->event_y);
+				printf("Mouse entered window %d, at coords (%d,%d)\n", ev->event, ev->event_x, ev->event_y);
 				break;
 			}
 			case XCB_LEAVE_NOTIFY: {
 				xcb_leave_notify_event_t *ev = (xcb_leave_notify_event_t *)e;
-				printf("Mouse left window %ld, at coords (%d,%d)\n", ev->event, ev->event_x, ev->event_y);
+				printf("Mouse left window %d, at coords (%d,%d)\n", ev->event, ev->event_x, ev->event_y);
 				break;
 			}
 			case XCB_KEY_PRESS: {
 				xcb_key_press_event_t *ev = (xcb_key_press_event_t *)e;
 				print_modifiers(ev->state);
-				printf("Key pressed in window %ld\n", ev->event);
+				printf("Key pressed in window %d\n", ev->event);
 				break;
 			}
 			case XCB_KEY_RELEASE: {
 				xcb_key_release_event_t *ev = (xcb_key_release_event_t *)e;
 				print_modifiers(ev->state);
-				printf("Key released in window %ld\n", ev->event);
+				printf("Key released in window %d\n", ev->event);
 				break;
 			}
 			default:

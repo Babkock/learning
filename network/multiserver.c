@@ -18,10 +18,10 @@ void interrupt(int sig);
 
 /* server response can be supplied on command line */
 int main(int argc, char *argv[]) {
-	int sockfd, newsockfd, portno, clilen;
+	int sockfd, newsockfd, portno, pid;
 	char response[BUF];
 	struct sockaddr_in serv_addr, cli_addr;
-	int pid;
+	unsigned int clilen;
 
 	signal(SIGINT, interrupt);
 	signal(SIGABRT, interrupt);
