@@ -41,7 +41,7 @@ mime_type types[] = {
 	{".", "text/plain"}
 };
 
-void format_size(char* buf, struct stat *stat) {
+void format_size(char *buf, struct stat *stat) {
 	bzero(buf, strlen(buf));
 	if (S_ISDIR(stat->st_mode)) {
 		sprintf(buf, "%s", "DIR");
@@ -74,6 +74,87 @@ void cerror(FILE *stream, char *cause, char *errno, char *shortm, char *longm) {
 	fprintf(stream, "<hr color=\"white\"/><em>Web Server</em>\n");
 }
 
+void serve_file(FILE *stream, struct stat *stat, char *filename) {
+	char *p;
+	char filetype[BUFSIZE];
+	for (int z = 0; z < sizeof(types); z++) {
+		if (strstr(filename, types[z].extension)) {
+			strcpy(filetype, types[z].type);
+			break;
+		}
+	}
+
+	/* print response header */
+	fprintf(stream, "HTTP/1.1 200 OK\r\n");
+	fprintf(stream, "Server: My Web Server\r\n");
+	fprintf(stream, "Content-Length: %d\r\n", (int)stat->st_size);
+	fprintf(stream, "Content-Type: %s\r\n", filetype);
+	fprintf(stream, "\r\n");
+	fflush(stream);
+
+	/* use mmap to return response body */
+	int fd = open(filename, O_RDONLY);
+	p = mmap(0, stat->st_size, PROT_READ, MAP_PRIVATE, fd, 0);
+	fwrite(p, 1, stat->st_size, stream);
+	munmap(p, stat->st_size);
+	close(fd);
+}
+
+void serve_directory(int cfd, char *filename) {
+	char buf[BBUFSIZE];
+	
+	sprintf(buf, "HTTP/1.1 200 OK\r\n%s%s%s%s%s%s%s%s",
+		"Server: My Web Server\r\n",
+		"Content-Type: text/html\r\n\r\n",
+		"<html><head><style>\n",
+		"body { font-family: monospace; font-size: 1.1em; background-color:#720000; color:white; }\n",
+		"a:link, a:hover, a:visited { color:lime; text-decoration:none }",
+		"a:active { color:white; } table, table tbody { width:80%; }",
+		"td {padding: 2px 6px; background-color:#220000; border:1px solid black; color:#eeeeee; }\n",
+		"</style></head>\n<body><table><tbody>\n");
+	
+	int fd, c;
+	char mtime[32], size[16];
+	struct stat statbuf;
+	struct dirent *dp;
+	DIR *d;
+
+	if ((fd = open(filename, O_RDONLY, 0)) < 0) {
+		error("Could not open directory\n");
+	}
+	if (write(cfd, buf, strlen(buf)) < 0) {
+		error("Could not write to buffer\n");
+	}
+	d = fdopendir(fd);
+
+	while ((dp = readdir(d)) != NULL) {
+		if (!strcmp(dp->d_name, ".") || !strcmp(dp->d_name, ".."))
+			continue;
+		if ((c = openat(fd, dp->d_name, O_RDONLY)) == -1) {
+			perror(dp->d_name);
+			continue;
+		}
+		fstat(c, &statbuf);
+
+		strftime(mtime, sizeof(mtime), "%Y-%m-%d %H:%M", localtime(&statbuf.st_mtime));
+		format_size(size, &statbuf);
+				
+		if (S_ISREG(statbuf.st_mode) || S_ISDIR(statbuf.st_mode)) {
+			char *f = S_ISDIR(statbuf.st_mode) ? "/" : "";
+			sprintf(buf, "<tr><td><a href=\"%s%s\">%s%s</a></td><td>%s</td><td>%s</td></tr>\n",
+				dp->d_name, f, dp->d_name, f, mtime, size);
+			write(cfd, buf, strlen(buf));
+			
+			bzero(buf, strlen(buf));
+		}
+	}
+	sprintf(buf, "</tbody></table></body></html>");
+	write(cfd, buf, strlen(buf));
+
+	close(fd);
+	closedir(d);
+}
+
 int main(int argc, char *argv[]) {
 	int parentfd, childfd, portno;
 	unsigned int clilen;
@@ -89,10 +170,7 @@ int main(int argc, char *argv[]) {
 	char method[BUFSIZE]; // request method
 	char uri[BUFSIZE]; // request URI
 	char version[BUFSIZE]; // request method
-	char filename[BUFSIZE]; // path derived from URI
-	char filetype[BUFSIZE]; // path derived from URI
-	char *p;
-	int fd, ffd, dd, z;
+	char filename[BUFSIZE]; // path derived from URI	
 
 	if (argc != 2) {
 		fprintf(stderr, "USAGE: %s [port]\n", argv[0]);
@@ -124,17 +202,11 @@ int main(int argc, char *argv[]) {
 	if (listen(parentfd, 5) < 0)
 		error("Error on listen\n");
 
-	char bbuf[BBUFSIZE], m_time[32], size[16];
-	struct stat statbuf;
-	struct dirent *dp;
-	DIR *d;
-
 	/* wait for connection request, parse HTTP,
 	 * serve content, close connection */
 	clilen = sizeof(clientaddr);
 	while (1) {
 		bzero(buf, BUFSIZE);
-		bzero(bbuf, BBUFSIZE);
 		/* wait */
 		if ((childfd = accept(parentfd, (struct sockaddr *)&clientaddr, &clilen)) < 0)
 			error("Error on accepting connection\n");
@@ -185,76 +257,15 @@ int main(int argc, char *argv[]) {
 
 		/* serve static content */
 		if (S_ISREG(sbuf.st_mode)) {
-			for (z = 0; z < sizeof(types); z++) {
-				if (strstr(filename, types[z].extension)) {
-					strcpy(filetype, types[z].type);
-					break;
-				}
-			}
-
-			/* print response header */
-			fprintf(stream, "HTTP/1.1 200 OK\n");
-			fprintf(stream, "Server: My Web Server\n");
-			fprintf(stream, "Content-Length: %d\n", (int)sbuf.st_size);
-			fprintf(stream, "Content-Type: %s\n", filetype);
-			fprintf(stream, "\r\n");
-			fflush(stream);
-
-			/* use mmap to return response body */
-			fd = open(filename, O_RDONLY);
-			p = mmap(0, sbuf.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
-			fwrite(p, 1, sbuf.st_size, stream);
-			munmap(p, sbuf.st_size);
-			close(fd);
+			serve_file(stream, &sbuf, filename);
 		} else if (S_ISDIR(sbuf.st_mode)) {
-			strcpy(filetype, "text/html");
-			sprintf(bbuf, "HTTP/1.1 200 OK\r\n%s%s%s%s%s%s%s",
-					"Content-Type: text/html\r\n\r\n",
-					"<html><head><style>",
-					"body{font-family: monospace; font-size: 1.1em; background-color:#720000; color:white; }",
-					"a:link, a:hover, a:visited { color:lime; text-decoration:none }",
-					"a:active { color:white; } table, table tbody { width:80%; }",
-					"td {padding: 2px 6px; background-color:#220000; border:1px solid black; color:#eeeeee; }",
-					"</style></head><body><table><tbody>\n");	
-			
-			if ((ffd = open(filename, O_RDONLY, 0)) < 0) {
-				error("Could not open directory\n");
-			}
-			if (write(childfd, bbuf, strlen(bbuf)) < 0) {
-				error("Could not write to buffer\n");
-			}
-			d = fdopendir(ffd);
-
-			while ((dp = readdir(d)) != NULL) {
-				if (!strcmp(dp->d_name, ".") || !strcmp(dp->d_name, ".."))
-					continue;
-				if ((dd = openat(ffd, dp->d_name, O_RDONLY)) == -1) {
-					perror(dp->d_name);
-					continue;
-				}
-				fstat(dd, &statbuf);
-
-				strftime(m_time, sizeof(m_time), "%Y-%m-%d %H:%M", localtime(&statbuf.st_mtime));
-				format_size(size, &statbuf);
-				
-				if (S_ISREG(statbuf.st_mode) || S_ISDIR(statbuf.st_mode)) {
-					char *f = S_ISDIR(statbuf.st_mode) ? "/" : "";
-					sprintf(bbuf, "<tr><td><a href=\"%s%s\">%s%s</a></td><td>%s</td><td>%s</td></tr>\n",
-						dp->d_name, f, dp->d_name, f, m_time, size);
-					write(childfd, bbuf, strlen(bbuf));
-					
-					bzero(bbuf, strlen(bbuf));
-				}
-			}
-			sprintf(bbuf, "</tbody></table></body></html>");
-			write(childfd, bbuf, strlen(bbuf));
-
-			close(ffd);
-			closedir(d);
+			serve_directory(childfd, filename);
 		}
+
 		fclose(stream);
 		close(childfd);
 	}
 
 	return 0;
 }
+
