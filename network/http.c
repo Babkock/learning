@@ -179,9 +179,10 @@ int main(int argc, char *argv[]) {
 	portno = atoi(argv[1]);
 
 	/* open socket descriptor */
-	parentfd = socket(AF_INET, SOCK_STREAM, 0);
-	if (parentfd < 0)
-		error("Error opening socket\n");
+	if ((parentfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+		fprintf(stderr, "Error opening socket\n");
+		return 2;
+	}
 
 	optval = 1;
 	setsockopt(parentfd, SOL_SOCKET, SO_REUSEADDR,
@@ -195,12 +196,18 @@ int main(int argc, char *argv[]) {
 		.sin_port = htons((unsigned short)portno)
 	};
 
-	if (bind(parentfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr)) < 0)
-		error("Error on binding to socket\n");
+	memset(serveraddr.sin_zero, '\0', sizeof(serveraddr.sin_zero));
+
+	if (bind(parentfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr)) < 0) {
+		fprintf(stderr, "Error on binding to socket\n");
+		return 2;
+	}
 
 	/* become ready to accept requests */
-	if (listen(parentfd, 5) < 0)
-		error("Error on listen\n");
+	if (listen(parentfd, 5) < 0) {
+		fprintf(stderr, "Error on listen\n");
+		return 2;
+	}
 
 	/* wait for connection request, parse HTTP,
 	 * serve content, close connection */
