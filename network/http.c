@@ -67,11 +67,12 @@ void cerror(FILE *stream, char *cause, char *errno, char *shortm, char *longm) {
 	fprintf(stream, "HTTP/1.1 %s %s\n", errno, shortm);
 	fprintf(stream, "Content-Type: text/html\n");
 	fprintf(stream, "\n");
-	fprintf(stream, "<html><style type=\"text/css\">* { color:white; }</style><title>Error</title>");
+	fprintf(stream, "<html><head><style type=\"text/css\">* { color:white; }</style><title>Error</title>");
+	fprintf(stream, "<meta charset=\"utf-8\" /></head>");
 	fprintf(stream, "<body bgcolor=\"720000\">\n");
 	fprintf(stream, "%s: %s\n", errno, shortm);
 	fprintf(stream, "<p>%s: %s</p>\n", longm, cause);
-	fprintf(stream, "<hr color=\"white\"/><em>Web Server</em>\n");
+	fprintf(stream, "<hr color=\"white\"/><em>Web Server</em></body></html>\n");
 }
 
 void serve_file(FILE *stream, struct stat *stat, char *filename) {
@@ -106,7 +107,7 @@ void serve_directory(int cfd, char *filename) {
 	sprintf(buf, "HTTP/1.1 200 OK\r\n%s%s%s%s%s%s%s%s",
 		"Server: My Web Server\r\n",
 		"Content-Type: text/html\r\n\r\n",
-		"<html><head><style>\n",
+		"<html><head><meta charset=\"utf-8\" /><title>My Web Server</title><style>\n",
 		"body { font-family: monospace; font-size: 1.1em; background-color:#720000; color:white; }\n",
 		"a:link, a:hover, a:visited { color:lime; text-decoration:none }",
 		"a:active { color:white; } table, table tbody { width:80%; }",

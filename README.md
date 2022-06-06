@@ -1,5 +1,7 @@
 # learning
 
+[![pipeline status](https://gitlab.com/Babkock/learning/badges/master/pipeline.svg)](https://gitlab.com/Babkock/learning/-/commits/master)
+
 Very old C and C++ programs, with some new C programs, and some assembly code. Goes over a variety of Unix/Linux programming techniques.
 
 ## Examples
