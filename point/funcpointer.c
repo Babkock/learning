@@ -1,7 +1,7 @@
 /* Function pointers
  * August 17, 2021 */
 #include <stdio.h>
-#define MAX 256
+#define MAX 5
 
 typedef struct {
 	char *name;
@@ -34,6 +34,8 @@ int main(void) {
 	Colors[0] = (Color){ .name = "red", .red = 255, .green = 10, .blue = 15 };
 	Colors[1] = (Color){ .name = "cyan", .red = 0, .green = 240, .blue = 255 };
 	Colors[2] = (Color){ .name = "black", .red = 0, .green = 0, .blue = 0 };
+	Colors[3] = (Color){ .name = "green", .red = 0, .green = 255, .blue = 0 };
+	Colors[4] = (Color){ .name = "yellow", .red = 255, .green = 255, .blue = 0 };
 	eachColor(printColor);
 	eachColor(hexColor);
 	return 0;
