@@ -173,6 +173,8 @@ int main(int argc, char *argv[]) {
 	char version[BUFSIZE]; // request method
 	char filename[BUFSIZE]; // path derived from URI	
 
+	printf("Hello world\n");
+
 	if (argc != 2) {
 		fprintf(stderr, "USAGE: %s [port]\n", argv[0]);
 		return 1;
