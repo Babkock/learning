@@ -28,14 +28,14 @@ int main(void) {
 	/* Set the variable c each time we call operation()
 	 * to avoid stack smashing */
 
-	printf("Size of short: %d\n", sizeof(short));
+	printf("Size of short: %ld\n", sizeof(short));
 	printf("Binary\t\t\t\t\t\tHex\n");
 	printf("Enter one number (a): ");
-	scanf("%d", &a);
+	scanf("%hd", &a);
 	bits(sizeof(a), &a);
 	
 	printf("Enter another number (b): ");
-	scanf("%d", &b);
+	scanf("%hd", &b);
 	bits(sizeof(b), &b);
 
 	c = a & b;   // a and b
