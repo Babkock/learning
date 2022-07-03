@@ -17,4 +17,6 @@ Very old C and C++ programs, with some new C programs, and some assembly code. G
 * [Time calculator](https://gitlab.com/Babkock/learning/-/blob/master/time.c)
 * [Simple shell](https://gitlab.com/Babkock/learning/-/blob/master/sys/shell.c)
 * [Symbolic links](https://gitlab.com/Babkock/learning/-/blob/master/sys/symlink.c)
+* [Bitwise operations](https://gitlab.com/Babkock/learning/-/blob/master/bits.c)
+* [Bit fields](https://gitlab.com/Babkock/learning/-/blob/master/point/bitfield.c)
 

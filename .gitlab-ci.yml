@@ -39,6 +39,7 @@ build:
     - cc -Wall -O2 network/hostname.c -o network/hostname
     - cc -Wall -O2 network/multiserver.c -o network/multiserver
     - cc -Wall -O2 network/server.c -o network/server
+    - cc -Wall -O2 point/bitfield.c -o point/bitfield
     - cc -Wall -O2 point/funcpointer.c -o point/funcpointer
     - cc -Wall -O2 point/linklist.c -o point/linklist
     - cc -Wall -O2 point/linkpop.c -o point/linkpop
@@ -67,6 +68,7 @@ build:
     - cc -Wall -O2 hashmap.c -o hashmap
     - cc -Wall -O2 hashtable.c -o hashtable
     - g++ -Wall -O2 time.cpp -o time
+    - cc -Wall -O2 bits.c -o bits
   artifacts:
     paths:
       - etc/class
@@ -108,6 +110,7 @@ build:
       - network/hostname
       - network/multiserver
       - network/server
+      - point/bitfield
       - point/funcpointer
       - point/linklist
       - point/linkpop
@@ -129,6 +132,8 @@ build:
       - thread/threads
       - hashmap
       - hashtable
+      - time
+      - bits
   cache:
     paths:
       - "*.o"
@@ -142,5 +147,9 @@ test:
     - ./etc/class
     - echo 5 | ./io/coffee
     - ./io/copy io/copy.cpp shit.txt
+    - cmp io/copy.cpp shit.txt
     - echo "size 5" | ./io/cstring
     - echo "fuck29" | ./io/digits
+    - printf "%d\n%d\n" 16 32 | ./bits
+    - printf "%d\n%d\n%d\n%d\n%d\n%d\n" 5 1 1996 4 20 1973 | ./point/bitfield
+

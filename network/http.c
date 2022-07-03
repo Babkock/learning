@@ -171,9 +171,7 @@ int main(int argc, char *argv[]) {
 	char method[BUFSIZE]; // request method
 	char uri[BUFSIZE]; // request URI
 	char version[BUFSIZE]; // request method
-	char filename[BUFSIZE]; // path derived from URI	
-
-	printf("Hello world\n");
+	char filename[BUFSIZE]; // path derived from URI
 
 	if (argc != 2) {
 		fprintf(stderr, "USAGE: %s [port]\n", argv[0]);
