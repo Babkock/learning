@@ -47,6 +47,8 @@ build:
     - cc -Wall -O2 point/malloc.c -o point/malloc
     - cc -Wall -O2 point/realloc.c -o point/realloc
     - cc -Wall -O2 point/structfunc.c -o point/structfunc
+    - cc -Wall -O2 point/hashmap.c -o hashmap
+    - cc -Wall -O2 point/hashtable.c -o hashtable
     - cc -Wall -O2 sys/daemon.c -o sys/daemon
     - cc -Wall -O2 sys/fork.c -o sys/fork
     - cc -Wall -O2 sys/ls.c -o sys/ls
@@ -65,8 +67,6 @@ build:
     - cc -Wall -O2 x/xhello.c -L/usr/X11/lib -lX11 -o x/xhello
     - cc -Wall -O2 x/xkeys.c -L/usr/X11/lib -lX11 -o x/xkeys
     - cc -Wall -O2 x/xresource.c -L/usr/X11/lib -lX11 -o x/xresource
-    - cc -Wall -O2 hashmap.c -o hashmap
-    - cc -Wall -O2 hashtable.c -o hashtable
     - g++ -Wall -O2 time.cpp -o time
     - cc -Wall -O2 bits.c -o bits
   artifacts:
@@ -112,6 +112,8 @@ build:
       - network/server
       - point/bitfield
       - point/funcpointer
+      - point/hashmap
+      - point/hashtable
       - point/linklist
       - point/linkpop
       - point/linkpush
@@ -148,8 +150,11 @@ test:
     - echo 5 | ./io/coffee
     - ./io/copy io/copy.cpp shit.txt
     - cmp io/copy.cpp shit.txt
+    - echo "race car" | ./io/racecar
     - echo "size 5" | ./io/cstring
     - echo "fuck29" | ./io/digits
     - printf "%d\n%d\n" 16 32 | ./bits
     - printf "%d\n%d\n%d\n%d\n%d\n%d\n" 5 1 1996 4 20 1973 | ./point/bitfield
+    - ./thread/mutex
+    - ./thread/condsignal
 
