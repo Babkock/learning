@@ -3,4 +3,6 @@ a.out
 pipe.fifo
 *.o
 *.bin
+bits
+time
 

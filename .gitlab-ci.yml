@@ -60,6 +60,8 @@ build:
     - cc -Wall -O2 sys/tick.c -o sys/tick
     - cc -Wall -O2 thread/condsignal.c -lpthread -o thread/condsignal
     - cc -Wall -O2 thread/mutex.c -lpthread -o thread/mutex
+    - g++ -Wall -O2 -pthread -std=c++11 thread/mutex.cpp -o thread/mutex2
+    - g++ -Wall -O2 -pthread thread/thread.cpp -o thread/thread
     - cc -Wall -O2 thread/threads.c -lpthread -o thread/threads
     - cc -Wall -O2 x/events.c -L/usr/X11/lib -lxcb -o x/events
     - cc -Wall -O2 x/fc.c -lfontconfig -o x/fc
@@ -131,6 +133,8 @@ build:
       - sys/tick
       - thread/condsignal
       - thread/mutex
+      - thread/mutex2
+      - thread/thread
       - thread/threads
       - hashmap
       - hashtable
@@ -157,4 +161,5 @@ test:
     - printf "%d\n%d\n%d\n%d\n%d\n%d\n" 5 1 1996 4 20 1973 | ./point/bitfield
     - ./thread/mutex
     - ./thread/condsignal
+    - ./thread/mutex2 6
 
