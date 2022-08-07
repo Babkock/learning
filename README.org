@@ -13,6 +13,7 @@ Very old C and C++ programs, with some new C programs, and some assembly code. G
 - [[https://gitlab.com/Babkock/learning/-/blob/master/network/README.org][Networking/Communication]]
 - [[https://gitlab.com/Babkock/learning/-/blob/master/point/README.org][Pointers]]
 - [[https://gitlab.com/Babkock/learning/-/blob/master/thread/README.org][Threads]]
+- [[https://gitlab.com/Babkock/learning/-/blob/master/x/README.org][X Window System]]
 
 * Examples
 

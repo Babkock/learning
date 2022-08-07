@@ -1,0 +1,56 @@
+#+TITLE: network
+#+AUTHOR: Tanner Babcock
+#+EMAIL: babkock@protonmail.com
+#+LANGUAGE: en
+
+** Client/Server
+
+=client.c= should be compiled and executed at the same time as either =server.c= or =multiserver.c=. This demonstrates the client/server relationship.
+
+*** =client.c=
+
+- Usage: =./client [ip address] [port]=
+
+- Example: =./client 127.0.0.1 5000=
+
+*** =multiserver.c=
+
+- Usage: =./multiserver [server response message]=
+
+- Example: =./multiserver hello world=
+
+** HTTP
+
+=http.c= is a working HTTP server with a working directory listing. It can serve a variety of file types.
+
+#+begin_src c
+mime_type types[] = {
+    {".css", "text/css"},
+    {".html", "text/html"},
+    {".js", "application/javascript"},
+    {".json", "application/json"},
+    {".jpg", "image/jpeg"},
+    {".jpeg", "image/jpeg"},
+    {".png", "image/png"},
+    {".webp", "image/webp"},
+    {".svg", "image/svg+xml"},
+    {".pdf", "application/pdf"},
+    {".", "text/plain"}
+};
+#+end_src
+
+*** =http.c=
+
+- Usage: =./http [port]=
+
+- Example: =./http 9000=
+
+** Hostname
+
+This program prints the returned IP address for the given hostname.
+
+*** =hostname.c=
+
+- Usage: =./hostname [domain name]=
+
+- Example: =./hostname tannerbabcock.com=

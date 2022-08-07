@@ -1,0 +1,64 @@
+#+TITLE: x
+#+AUTHOR: Tanner Babcock
+#+EMAIL: babkock@protonmail.com
+#+LANGUAGE: en
+
+Basic GUI examples using the X window system, and various libraries. These examples cover fonts and colors.
+
+** Events
+
+[[https://gitlab.com/Babkock/learning/-/blob/master/x/events.c][This example]] records 8 different types of XCB events. Compile with =-lxcb=
+
+#+begin_src c
+void print_modifiers(uint32_t mask) {
+    const char **mod, *mods[] = {
+        "Shift", "Lock", "Ctrl", "Alt",
+        "Mod2", "Mod3", "Mod4", "Mod5",
+        "Button1", "Button2", "Button3", "Button4", "Button5"
+    };
+    printf("Modifier mask: ");
+    for (mod = mods; mask; mask >>= 1, mod++) {
+        if (mask & 1)
+            printf(*mod);
+    }
+    putchar('\n');
+}
+#+end_src
+
+** Fontconfig
+
+[[https://gitlab.com/Babkock/learning/-/blob/master/x/fc.c][This small program]] returns a file path for fonts matching the given FontConfig syntax. Compile with =-lfontconfig=.
+
+- Usage: =./fc "font name"=
+
+- Example: =./fc "SpaceMono Nerd Font"=
+
+
+** XFT/Freetype
+
+[[https://gitlab.com/Babkock/learning/-/blob/master/x/xft.c][This fancy example]] uses FontConfig syntax to load a font, then prints a string with it in three different colors.
+Compile with the options =-lX11 -lXft -lfreetype -I/usr/include/freetype2=
+
+** Xresource
+
+[[https://gitlab.com/Babkock/learning/-/blob/master/x/xresource.c][This program]] reads the 16 colors from the current =.Xresources= and prints them. Compile with the option =-lX11=
+
+#+begin_src c
+/* load the database */
+if (!(db = XrmGetStringDatabase(resource_manager))) {
+    fprintf(stderr, "Could not load database\n");
+    return 3;
+}
+for (int x = 0; x < 16; x++) {
+    bzero(color, sizeof(color));
+    sprintf(color, "color%d", x);
+
+    XrmGetResource(db, color, "String", &type, &ret);
+    if (ret.addr != NULL && !(strncmp("String", type, 64)))
+        val = ret.addr;
+
+    printf("%s = '%s'\n", color, val);
+}
+XCloseDisplay(dpy);
+
+#+end_src

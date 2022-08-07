@@ -1,0 +1,167 @@
+#+TITLE: point
+#+AUTHOR: Tanner Babcock
+#+EMAIL: babkock@protonmail.com
+#+LANGUAGE: en
+
+This lesson goes over pointers, addresses, bit fields, dynamic memory allocation, linked lists, hash maps, hash tables,
+dereferencing pointers, comparing pointers, and pointers to functions.
+
+** Bit Fields
+
+[[https://gitlab.com/Babkock/learning/-/blob/master/point/bitfield.c][This program]] illustrates the difference between a data type's struct without bit fields, and a struct with them.
+
+#+begin_src c
+typedef struct {
+    unsigned short month;
+    unsigned short day;
+    unsigned short year;
+} DateBig;
+
+typedef struct {
+    unsigned short month : 4;
+    unsigned short day : 5;
+    unsigned short year;
+} DateSmall;
+#+end_src
+
+** Compare
+
+[[https://gitlab.com/Babkock/learning/-/blob/master/point/compare.c][This program]] shows how to dereference pointers, and shows the difference between a pointer and what it points to.
+
+** Funcpointer
+
+[[https://gitlab.com/Babkock/learning/-/blob/master/point/funcpointer.c][This program]] show how to use a pointer to a function, call it, and pass it as an argument.
+
+#+begin_src c
+void eachColor(void (*fp)(Color *c)) {
+    int i;
+    for (i = 0; i < MAX; i++) {
+        // this runs the function pointed to by the first argument to this function
+        (*fp)(&Colors[i]);
+    }
+}
+
+#+end_src
+
+** Hash Map
+
+[[https://gitlab.com/Babkock/learning/-/blob/master/point/hashmap.c][This]] is a working example of a hash map.
+
+#+begin_src c
+typedef struct {
+    char *key;
+    int value;
+} item;
+
+item *linear_search(item *items, size_t size, const char *key) {
+    for (size_t i = 0; i < size; i++) {
+        if (strcmp(items[i].key, key) == 0) {
+            return &items[i];
+        }
+    }
+    return NULL;
+}
+
+int main(void) {
+    item items[] = {
+        {"one", 10},
+        {"two", 20},
+        {"three", 30},
+        {"four", 40},
+        {"five", 50}
+    };
+
+#+end_src
+
+** Hash Table
+
+[[https://gitlab.com/Babkock/learning/-/blob/master/point/hashtable.c][This program]] show how to create a hash table/associative array using linked lists.
+
+#+begin_src c
+typedef struct list_t {
+    char *key;
+    char *value;
+    struct list_t *next;
+} list;
+
+typedef struct hashTable_t {
+    unsigned int size;
+    list **array;
+    /* each cell of this array is a pointer to the first node of a
+     * linked list */
+} hashTable;
+
+#+end_src
+
+** Linked Lists
+
+Linked lists with [[https://gitlab.com/Babkock/learning/-/blob/master/point/linkpush.c][push]] and [[https://gitlab.com/Babkock/learning/-/blob/master/point/linkpop.c][pop]] functions. A linked list is a dynamically-allocated array of data objects, each containing a pointer to the next object in the sequence.
+
+#+begin_src c
+typedef struct node {
+    int val;
+    struct node *next;
+} node_t;
+
+void print_list(node_t *h) {
+    node_t *current = h;
+
+    while (current != NULL) {
+        printf("%x = %d\n", &current->val, current->val); // print address of value and value
+        current = current->next; // advance to next item
+    }
+}
+
+#+end_src
+
+** Malloc
+
+Simple =malloc()= [[https://gitlab.com/Babkock/learning/-/blob/master/point/malloc.c][example]], can allocate up to 20 characters.
+
+#+begin_src c
+char *p;
+const int len = 20;
+p = (char *)malloc(len * sizeof(char));
+if (p == NULL) {
+    fprintf(stderr, "Insufficient memory\n");
+    return 1;
+}
+else {
+    printf("Enter a string: ");
+    fgets(p, len, stdin);
+    printf("Address of string: %p\n", (void *)&p);
+    printf("The string is: %s", p);
+    free(p);
+    p = NULL;
+}
+return 0;
+#+end_src
+
+** Realloc
+
+True dynamic memory allocation with =realloc()=, has no size limit on strings it can allocate.
+
+** Structfunc
+
+[[https://gitlab.com/Babkock/learning/-/blob/master/point/structfunc.c][Small example]] that shows how to dereference pointers to structs/objects.
+
+#+begin_src c
+typedef struct {
+    char name[70];
+    int age;
+    double gpa;
+} Student;
+
+void getStudent(Student *s) {
+    printf("Enter name: ");
+    scanf(" %[^\n]", s->name);
+    printf("Enter age: ");
+    scanf("%d", &s->age);
+    printf("Enter GPA: ");
+    scanf("%lf", &s->gpa);
+}
+#+end_src
+
+** Union
+
+Example that shows how to use a union.
