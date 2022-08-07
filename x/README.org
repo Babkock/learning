@@ -29,6 +29,8 @@ void print_modifiers(uint32_t mask) {
 
 [[https://gitlab.com/Babkock/learning/-/blob/master/x/fc.c][This small program]] returns a file path for fonts matching the given FontConfig syntax. Compile with =-lfontconfig=.
 
+*** =fc.c=
+
 - Usage: =./fc "font name"=
 
 - Example: =./fc "SpaceMono Nerd Font"=

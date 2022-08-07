@@ -37,6 +37,8 @@ void *handler(void *arg) {
 
 [[https://gitlab.com/Babkock/learning/-/blob/master/thread/mutex.cpp][This more complicated example]] shows how to use the C++ standard threads library's mutual exclusion.
 
+*** =mutex.cpp=
+
 - Usage: =./mutex2 [number of threads]=
 
 - Example: =./mutex2 10=

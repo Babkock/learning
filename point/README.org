@@ -139,7 +139,7 @@ return 0;
 
 ** Realloc
 
-True dynamic memory allocation with =realloc()=, has no size limit on strings it can allocate.
+[[https://gitlab.com/Babkock/learning/-/blob/master/point/realloc.c][True dynamic memory allocation]] with =realloc()=, has no size limit on strings it can allocate.
 
 ** Structfunc
 
