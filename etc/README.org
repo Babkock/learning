@@ -1,0 +1,59 @@
+#+TITLE: etc
+#+AUTHOR: Tanner Babcock
+#+EMAIL: babkock@protonmail.com
+#+LANGUAGE: en
+
+Miscellaneous example programs that do not fit into the other categories.
+
+* Curses
+
+** =curses.c=
+
+This program writes vertically in your terminal. It must be compiled with the =-lncurses= option, like this.
+
+#+begin_src sh
+cc curses.c -lncurses -o curses
+#+end_src
+
+** =fields.c=
+
+A curses form that saves user input. This must be compiled with both =-lncurses= and =-lform=, like this.
+
+#+begin_src sh
+cc fields.c -lncurses -lform -o fields
+#+end_src
+
+** =getch.c=
+
+This program prints the codes of all pressed keys. It requires only =-lncurses=.
+
+** =password.c=
+
+This program shows how to retrieve a string from the user without echoing the pressed characters, like a password
+prompt. Like the others, this program must be compiled with =-lncurses=.
+
+** =window.c=
+
+This program allows the user to move a small window around the terminal screen.
+
+* Other
+
+** =outfx.c=
+
+This one demonstrates how to use the ANSI color codes.
+
+** =invert.c=
+
+This program inverts bit values.
+
+** =func.c=
+
+Simple example showing how to use functions in C. This program accepts one argument, a number.
+
+** =class.cpp=
+
+C++ classes example.
+
+** =inherit.cpp=
+
+C++ example showing class inheritance/polymorphism.

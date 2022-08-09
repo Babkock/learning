@@ -1,0 +1,25 @@
+#+TITLE: sys
+#+AUTHOR: Tanner Babcock
+#+EMAIL: babkock@protonmail.com
+#+LANGUAGE: en
+
+These examples illustrate how to use the standard Unix library functions, for making system calls, and interacting with the
+operating system.
+
+** FIFO Read/Write
+
+=speak.c= should be compiled and executed at the same time as =tick.c=. These deal with FIFO writing, and reading, respectively.
+Much like the [[https://gitlab.com/Babkock/learning/-/blob/master/network/README.org][networking examples]], which read from and write to sockets, =speak.c= and =tick.c= must both be running at the same time. One program will read a
+string from the user, and the other will print the received string to demonstrate the connectivity.
+
+** Daemons and Forking
+
+=daemon.c= and =fork.c= deal with the =fork()= function and child processes. =pipe.c= creates a pipe, forks itself, and communicates with its child process through the pipe.
+
+** Ls
+
+=ls.c= is a simple directory listing. It accepts a directory as an optional argument, for example "=$ ./ls ~/Documents=".
+
+** Shell
+
+=shell.c= is a very simple shell that sends lines from stdin to =system()=, or /bin/sh. It has only two built-in commands, "cd" and "exit".

@@ -3,9 +3,12 @@
 #+EMAIL: babkock@protonmail.com
 #+LANGUAGE: en
 
+These programs deal with TCP/IP connections, writing to and reading from sockets, ports, and IP addresses.
+
 ** Client/Server
 
-=client.c= should be compiled and executed at the same time as either =server.c= or =multiserver.c=. This demonstrates the client/server relationship.
+=client.c= should be compiled and executed at the same time as either =server.c= or =multiserver.c=.
+The client program requires the server program to be running, so it can connect to it. This demonstrates the client/server relationship.
 
 *** =client.c=
 
