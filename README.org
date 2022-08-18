@@ -10,13 +10,13 @@ Some programs utilize command-line arguments. Remember, if you ever see =int mai
 
 * Lessons
 
-- [[https://gitlab.com/Babkock/learning/-/blob/master/boot/README.org][Bootloader]]
-- [[https://gitlab.com/Babkock/learning/-/blob/master/etc/README.org][Curses/Colors/C++ Classes]]
-- [[https://gitlab.com/Babkock/learning/-/blob/master/network/README.org][Networking/Communication]]
-- [[https://gitlab.com/Babkock/learning/-/blob/master/point/README.org][Pointers]]
-- [[https://gitlab.com/Babkock/learning/-/blob/master/sys/README.org][System Calls]]
-- [[https://gitlab.com/Babkock/learning/-/blob/master/thread/README.org][Threads]]
-- [[https://gitlab.com/Babkock/learning/-/blob/master/x/README.org][X Window System]]
+- [[https://gitlab.com/Babkock/learning/-/tree/master/boot][Bootloader]]
+- [[https://gitlab.com/Babkock/learning/-/tree/master/etc][Curses/Colors/C++ Classes]]
+- [[https://gitlab.com/Babkock/learning/-/tree/master/network][Networking/Communication]]
+- [[https://gitlab.com/Babkock/learning/-/tree/master/point][Pointers]]
+- [[https://gitlab.com/Babkock/learning/-/tree/master/sys][System Calls]]
+- [[https://gitlab.com/Babkock/learning/-/tree/master/thread][Threads]]
+- [[https://gitlab.com/Babkock/learning/-/tree/master/x][X Window System]]
 
 * Examples
 
