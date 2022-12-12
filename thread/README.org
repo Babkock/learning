@@ -1,0 +1,48 @@
+#+TITLE: thread
+#+AUTHOR: Tanner Babcock
+#+EMAIL: babkock@protonmail.com
+#+LANGUAGE: en
+
+The three C files in this directory must be compiled with the =-lpthread= option, as in "=$ cc condsignal.c -lpthread -o condsignal=". You can read
+the [[https://gitlab.com/Babkock/learning/-/blob/master/.gitlab-ci.yml][GitLab CI]] script for details.
+
+The C++ files must be compiled with the options =-pthread -std=c++11=, as in
+"=$ g++ -pthread -std=c++11 mutex.cpp -o mutex2=".
+
+** Condition Signal
+
+[[https://gitlab.com/Babkock/learning/-/blob/master/thread/condsignal.c][Complicated example]] that shows how to use condition signalling between threads.
+
+** Mutex (C)
+
+[[https://gitlab.com/Babkock/learning/-/blob/master/thread/mutex.c][This example]] shows the mutual exclusion technique, used to allow threads to share resources.
+
+#+begin_src c
+pthread_t tid[4];
+int counter;
+pthread_mutex_t lock;
+
+void *handler(void *arg) {
+    pthread_mutex_lock(&lock);
+    counter++;
+    printf("Job %d has started\n", counter);
+    sleep(2);
+    printf("Job %d has finished\n", counter);
+    pthread_mutex_unlock(&lock);
+    return NULL;
+}
+#+end_src
+
+** Mutex (C++)
+
+[[https://gitlab.com/Babkock/learning/-/blob/master/thread/mutex.cpp][This more complicated example]] shows how to use the C++ standard threads library's mutual exclusion.
+
+*** =mutex.cpp=
+
+- Usage: =./mutex2 [number of threads]=
+
+- Example: =./mutex2 10=
+
+** Threads
+
+[[https://gitlab.com/Babkock/learning/-/blob/master/thread/threads.c][Simple threads example]] that prints each thread's ID.

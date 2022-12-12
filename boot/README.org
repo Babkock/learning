@@ -1,0 +1,75 @@
+#+TITLE: boot
+#+AUTHOR: Tanner Babcock
+#+EMAIL: babkock@protonmail.com
+#+LANGUAGE: en
+
+This directory has two assembly files, =disk.asm= and =gdt.asm=, which are two bootloaders that implement the disk and the GDT,
+respectively. It also contains a very simple kernel written in C.
+
+Compiling and running these examples requires NASM and QEMU to be installed. Compiling the kernel requires an i386 cross-compiler.
+
+* Building
+
+** =disk.asm= and =gdt.asm=
+
+- To compile: =$ nasm disk.asm -f bin -o disk.bin=
+- To run: =$ qemu-system-i386 -hda disk.bin=
+
+You should also try the commands =$ xxd disk.bin= and =$ objdump -d disk.bin= with these compiled files.
+
+** Kernel
+
+It is necessary to have a cross-compiler installed, prefixed with "i386-elf-", and placed in the user's =$PATH=.
+Once installed, simply type =make= to compile and run the kernel. The Makefile runs these commands:
+
+#+begin_src sh
+nasm bootsect.asm -f bin -o bootsect.bin
+nasm kernel_entry.asm -f elf -o kernel_entry.o
+i386-elf-gcc -O2 -nostdlib -nostartfiles -ffreestanding -c kernel.c -o kernel.o
+i386-elf-ld -o kernel.bin -Ttext 0x1000 kernel_entry.o kernel.o --oformat binary
+cat bootsect.bin kernel.bin > kimage.bin
+qemu-system-i386 -fda kimage.bin
+#+end_src
+
+* Source
+
+** Kernel
+
+#+begin_src c
+void dummy(void) {
+}
+
+void main(void) {
+    char *video_memory = (char *)0xb80a0;
+    char *str = "Welcome to the kernel!";
+    int x;
+
+    /* prints the string in video memory, in alternating
+     * colors, directly below "Landed in 32-bit Protected Mode" */
+    for (x = 0; x < 22; x++) {
+        (*video_memory++) = str[x];
+        if (x % 2 == 0)
+            (*video_memory++) = 0x0a;
+        else if (x % 3 == 0)
+            (*video_memory++) = 0x0d;
+        else
+            (*video_memory++) = 0x0c;
+    }
+}
+#+end_src
+
+** Bootloader
+
+#+begin_src asm
+[bits 16]
+load_kernel:
+    mov bx, MSG_LOAD_KERNEL
+    call print
+    call print_nl
+
+    mov bx, KERNEL_OFFSET
+    mov dh, 2
+    mov dl, [BOOT_DRIVE]
+    call disk_load
+    ret
+#+end_src

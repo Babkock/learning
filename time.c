@@ -1,4 +1,4 @@
-/* Time calculator by Tanner Babcock
+/* Time calculator
  * May 4, 2012 */
 #include <stdio.h>
 #include <stdlib.h>

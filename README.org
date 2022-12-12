@@ -1,0 +1,40 @@
+#+TITLE: learning
+#+AUTHOR: Tanner Babcock
+#+EMAIL: babkock@protonmail.com
+#+LANGUAGE: en
+
+[[https://gitlab.com/Babkock/learning/-/commits/master][https://gitlab.com/Babkock/learning/badges/master/pipeline.svg]]
+
+* Disclaimer
+
+This repository was synchronized with the GitLab version on December 12, 2022. It is now read-only and has [[https://gitlab.com/Babkock/learning][officially moved to GitLab.]]
+
+Very old C and C++ programs, with some new C programs, and some assembly code. Goes over a variety of Unix/Linux programming techniques. Some of these programs require the linking of external libraries. Instructions on how to compile these programs are included in the source code and in the lessons.
+Some programs utilize command-line arguments. Remember, if you ever see =int main(int argc, char *argv[])= instead of =int main(void)= , that means the program accepts command-line arguments. Each of these programs are noted in the lessons.
+
+* Lessons
+
+- [[https://github.com/Babkock/learning/tree/master/boot][Bootloader]]
+- [[https://github.com/Babkock/learning/tree/master/etc][Curses/Colors/C++ Classes]]
+- [[https://github.com/Babkock/learning/tree/master/network][Networking/Communication]]
+- [[https://github.com/Babkock/learning/tree/master/point][Pointers]]
+- [[https://github.com/Babkock/learning/tree/master/sys][System Calls]]
+- [[https://github.com/Babkock/learning/tree/master/thread][Threads]]
+- [[https://github.com/Babkock/learning/tree/master/x][X Window System]]
+
+* Examples
+
+- *[[https://gitlab.com/Babkock/learning/-/blob/master/boot/disk.asm][Bootloader]] and [[https://gitlab.com/Babkock/learning/-/blob/master/boot/kernel/bootsect.asm][kernel]]* for use with QEMU
+- TCP [[https://gitlab.com/Babkock/learning/-/blob/master/network/client.c][client]] and [[https://gitlab.com/Babkock/learning/-/blob/master/network/multiserver.c][server]] with multiple requests
+- *[[https://gitlab.com/Babkock/learning/-/blob/master/network/http.c][Working HTTP server]]*
+- [[https://gitlab.com/Babkock/learning/-/blob/master/x/xft.c][XFT font drawing]]
+- [[https://gitlab.com/Babkock/learning/-/blob/master/sys/tick.c][Reading]] and [[https://gitlab.com/Babkock/learning/-/blob/master/sys/speak.c][writing]] FIFO
+- [[https://gitlab.com/Babkock/learning/-/blob/master/point/linklist.c][Linked list]] with [[https://gitlab.com/Babkock/learning/-/blob/master/point/linkpush.c][push]] and [[https://gitlab.com/Babkock/learning/-/blob/master/point/linkpop.c][pop]] functions
+- [[https://gitlab.com/Babkock/learning/-/blob/master/etc/curses.c][Simple Ncurses program]] that writes vertically in the terminal
+- [[https://gitlab.com/Babkock/learning/-/blob/master/thread/threads.c][Threads]] with [[https://gitlab.com/Babkock/learning/-/blob/master/thread/mutex.c][mutex]]
+- [[https://gitlab.com/Babkock/learning/-/blob/master/point/hashmap.c][Hash map]] and [[https://gitlab.com/Babkock/learning/-/blob/master/thread/hashtable.c][hash table]]
+- [[https://gitlab.com/Babkock/learning/-/blob/master/time.c][Time calculator]]
+- [[https://gitlab.com/Babkock/learning/-/blob/master/sys/shell.c][Simple shell]]
+- [[https://gitlab.com/Babkock/learning/-/blob/master/sys/symlink.c][Symbolic links]]
+- [[https://gitlab.com/Babkock/learning/-/blob/master/bits.c][Bitwise operations]]
+- [[https://gitlab.com/Babkock/learning/-/blob/master/point/bitfield.c][Bit field]]
