@@ -4,6 +4,7 @@
 #+LANGUAGE: en
 
 [[https://gitlab.com/Babkock/learning/-/commits/master][https://gitlab.com/Babkock/learning/badges/master/pipeline.svg]]
+[[https://github.com/Babkock/learning/actions/workflows/c-cpp.yml/badge.svg]]
 
 * Disclaimer
 

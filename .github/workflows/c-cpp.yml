@@ -28,4 +28,18 @@ jobs:
         cc -Wall -O2 etc/window.c -lncurses -o etc/window
         cc -Wall -O2 io/cat.c -o io/cat
         cc -Wall -O2 io/cat2.c -o io/cat2
-
+        cc -Wall -O2 io/coffee.c -o io/coffee
+        g++ -Wall -O2 io/copy.cpp -o io/copy
+        g++ -Wall -O2 io/cstring.cpp -o io/cstring
+        cc -Wall -O2 io/digits.c -o io/digits
+        cc -Wall -O2 io/echo.c -o io/echo
+        g++ -Wall -O2 io/echo.cpp -o io/echo2
+        cc -Wall -O2 io/evensodds.c -o io/evensodds
+        cc -Wall -O2 io/head.c -o io/head
+        cc -Wall -O2 io/loops.c -o io/loops
+        g++ -Wall -O2 io/minmax.cpp -o io/minmax
+        cc -Wall -O2 io/racecar.c -o io/racecar
+        cc -Wall -O2 io/read.c -o io/read
+        g++ -Wall -O2 io/read.cpp -o io/read2
+        cc -Wall -O2 io/size.c -o io/size
+        cc -Wall -O2 io/spaces.c -o io/spaces
