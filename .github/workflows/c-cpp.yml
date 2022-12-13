@@ -59,6 +59,7 @@ jobs:
         cc -Wall -O2 point/malloc.c -o point/malloc
         cc -Wall -O2 point/realloc.c -o point/realloc
         cc -Wall -O2 point/structfunc.c -o point/structfunc
+        cc -Wall -O2 point/union.c -o point/union
         cc -Wall -O2 point/hashmap.c -o point/hashmap
         cc -Wall -O2 point/hashtable.c -o point/hashtable
         cc -Wall -O2 sys/daemon.c -o sys/daemon
