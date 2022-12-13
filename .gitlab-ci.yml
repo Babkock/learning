@@ -47,8 +47,9 @@ build:
     - cc -Wall -O2 point/malloc.c -o point/malloc
     - cc -Wall -O2 point/realloc.c -o point/realloc
     - cc -Wall -O2 point/structfunc.c -o point/structfunc
-    - cc -Wall -O2 point/hashmap.c -o hashmap
-    - cc -Wall -O2 point/hashtable.c -o hashtable
+    - cc -Wall -O2 point/union.c -o point/union
+    - cc -Wall -O2 point/hashmap.c -o point/hashmap
+    - cc -Wall -O2 point/hashtable.c -o point/hashtable
     - cc -Wall -O2 sys/daemon.c -o sys/daemon
     - cc -Wall -O2 sys/fork.c -o sys/fork
     - cc -Wall -O2 sys/ls.c -o sys/ls
@@ -114,14 +115,15 @@ build:
       - network/server
       - point/bitfield
       - point/funcpointer
-      - point/hashmap
-      - point/hashtable
       - point/linklist
       - point/linkpop
       - point/linkpush
       - point/malloc
       - point/realloc
       - point/structfunc
+      - point/union
+      - point/hashmap
+      - point/hashtable
       - sys/daemon
       - sys/fork
       - sys/ls
@@ -136,8 +138,6 @@ build:
       - thread/mutex2
       - thread/thread
       - thread/threads
-      - hashmap
-      - hashtable
       - time
       - bits
   cache:

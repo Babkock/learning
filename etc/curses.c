@@ -3,6 +3,8 @@
 /* Compile with -lncurses */
 #include <ncurses.h>
 
+// test
+
 int main(void) {
     WINDOW *w = initscr();
     int x, y, a, b = 0, c = 0;
