@@ -43,3 +43,43 @@ jobs:
         g++ -Wall -O2 io/read.cpp -o io/read2
         cc -Wall -O2 io/size.c -o io/size
         cc -Wall -O2 io/spaces.c -o io/spaces
+        cc -Wall -O2 io/strings.c -o io/strings
+        cc -Wall -O2 io/write.c -o io/write
+        g++ -Wall -O2 io/write.cpp -o io/write2
+        cc -Wall -O2 network/client.c -o network/client
+        cc -Wall -O2 network/hostname.c -o network/hostname
+        cc -Wall -O2 network/http.c -o network/http
+        cc -Wall -O2 network/multiserver.c -o network/multiserver
+        cc -Wall -O2 network/server.c -o network/server
+        cc -Wall -O2 point/bitfield.c -o point/bitfield
+        cc -Wall -O2 point/funcpointer.c -o point/funcpointer
+        cc -Wall -O2 point/linklist.c -o point/linklist
+        cc -Wall -O2 point/linkpop.c -o point/linkpop
+        cc -Wall -O2 point/linkpush.c -o point/linkpush
+        cc -Wall -O2 point/malloc.c -o point/malloc
+        cc -Wall -O2 point/realloc.c -o point/realloc
+        cc -Wall -O2 point/structfunc.c -o point/structfunc
+        cc -Wall -O2 point/hashmap.c -o point/hashmap
+        cc -Wall -O2 point/hashtable.c -o point/hashtable
+        cc -Wall -O2 sys/daemon.c -o sys/daemon
+        cc -Wall -O2 sys/fork.c -o sys/fork
+        cc -Wall -O2 sys/ls.c -o sys/ls
+        cc -Wall -O2 sys/pid.c -o sys/pid
+        cc -Wall -O2 sys/pipe.c -o sys/pipe
+        cc -Wall -O2 sys/shell.c -o sys/shell
+        cc -Wall -O2 sys/speak.c -o sys/speak
+        cc -Wall -O2 sys/symlink.c -o sys/symlink
+        cc -Wall -O2 sys/tick.c -o sys/tick
+        cc -Wall -O2 thread/condsignal.c -lpthread -o thread/condsignal
+        cc -Wall -O2 thread/mutex.c -lpthread -o thread/mutex
+        g++ -Wall -O2 -pthread -std=c++11 thread/mutex.cpp -o thread/mutex2
+        g++ -Wall -O2 -pthread thread/thread.cpp -o thread/thread
+        cc -Wall -O2 thread/threads.c -lpthread -o thread/threads
+        cc -Wall -O2 x/events.c -L/usr/X11/lib -lxcb -o x/events
+        cc -Wall -O2 x/fc.c -lfontconfig -o x/fc
+        cc -Wall -O2 x/xft.c -lX11 -lXft -lfreetype -I/usr/include/freetype2 -o x/xft
+        cc -Wall -O2 x/xhello.c -L/usr/X11/lib -lX11 -o x/xhello
+        cc -Wall -O2 x/xkeys.c -L/usr/X11/lib -lX11 -o x/xkeys
+        cc -Wall -O2 x/xresource.c -L/usr/X11/lib -lX11 -o x/xresource
+        g++ -Wall -O2 time.cpp -o time
+        cc -Wall -O2 bits.c -o bits
