@@ -5,6 +5,7 @@
 
 [[https://gitlab.com/Babkock/learning/-/commits/master][https://gitlab.com/Babkock/learning/badges/master/pipeline.svg]]
 [[https://github.com/Babkock/learning/actions/workflows/c-cpp.yml/badge.svg]]
+[[https://img.shields.io/badge/License-GPL_v2-blue.svg]]
 
 Very old C and C++ programs, with some new C programs, and some assembly code. Goes over a variety of Unix/Linux programming techniques. Some of these programs require the linking of external libraries. Instructions on how to compile these programs are included in the source code and in the lessons.
 Some programs utilize command-line arguments. Remember, if you ever see =int main(int argc, char *argv[])= instead of =int main(void)= , that means the program accepts command-line arguments. Each of these programs are noted in the lessons.
