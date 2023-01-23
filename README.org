@@ -14,8 +14,8 @@ Some programs utilize command-line arguments. Remember, if you ever see =int mai
 
 - [[https://github.com/Babkock/learning/tree/master/boot][Bootloader]]
 - [[https://github.com/Babkock/learning/tree/master/etc][Curses/Colors/C++ Classes]]
-- [[https://gitlab.com/Babkock/learning/tree/master/network][Networking/Communication]]
-- [[https://gitlab.com/Babkock/learning/tree/master/point][Pointers]]
+- [[https://github.com/Babkock/learning/tree/master/network][Networking/Communication]]
+- [[https://github.com/Babkock/learning/tree/master/point][Pointers]]
 - [[https://github.com/Babkock/learning/tree/master/sys][System Calls]]
 - [[https://github.com/Babkock/learning/tree/master/thread][Threads]]
 - [[https://github.com/Babkock/learning/tree/master/x][X Window System]]
@@ -27,13 +27,13 @@ Some programs utilize command-line arguments. Remember, if you ever see =int mai
 - *[[https://github.com/Babkock/learning/blob/master/network/http.c][Working HTTP server]]*
 - [[https://github.com/Babkock/learning/blob/master/x/xft.c][XFT font drawing]]
 - [[https://github.com/Babkock/learning/blob/master/sys/tick.c][Reading]] and [[https://github.com/Babkock/learning/blob/master/sys/speak.c][writing]] FIFO
-- [[https://github.com/Babkock/learning/blob/master/point/linklist.c][Linked list]] with [[https://github.com/Babkock/learning/blob/master/point/linkpush.c][push]] and [[https://gitlab.com/Babkock/learning/-/blob/master/point/linkpop.c][pop]] functions
-- [[https://gitlab.com/Babkock/learning/-/blob/master/etc/curses.c][Simple Ncurses program]] that writes vertically in the terminal
-- [[https://gitlab.com/Babkock/learning/-/blob/master/thread/threads.c][Threads]] with [[https://gitlab.com/Babkock/learning/-/blob/master/thread/mutex.c][mutex]]
-- [[https://gitlab.com/Babkock/learning/-/blob/master/point/hashmap.c][Hash map]] and [[https://gitlab.com/Babkock/learning/-/blob/master/thread/hashtable.c][hash table]]
-- [[https://gitlab.com/Babkock/learning/-/blob/master/time.c][Time calculator]]
-- [[https://gitlab.com/Babkock/learning/-/blob/master/sys/shell.c][Simple shell]]
-- [[https://gitlab.com/Babkock/learning/-/blob/master/sys/symlink.c][Symbolic links]]
-- [[https://gitlab.com/Babkock/learning/-/blob/master/bits.c][Bitwise operations]]
-- [[https://gitlab.com/Babkock/learning/-/blob/master/point/bitfield.c][Bit field]]
+- [[https://github.com/Babkock/learning/blob/master/point/linklist.c][Linked list]] with [[https://github.com/Babkock/learning/blob/master/point/linkpush.c][push]] and [[https://github.com/Babkock/learning/blob/master/point/linkpop.c][pop]] functions
+- [[https://github.com/Babkock/learning/blob/master/etc/curses.c][Simple Ncurses program]] that writes vertically in the terminal
+- [[https://github.com/Babkock/learning/blob/master/thread/threads.c][Threads]] with [[https://github.com/Babkock/learning/blob/master/thread/mutex.c][mutex]]
+- [[https://github.com/Babkock/learning/blob/master/point/hashmap.c][Hash map]] and [[https://github.com/Babkock/learning/blob/master/thread/hashtable.c][hash table]]
+- [[https://github.com/Babkock/learning/blob/master/time.c][Time calculator]]
+- [[https://github.com/Babkock/learning/blob/master/sys/shell.c][Simple shell]]
+- [[https://github.com/Babkock/learning/-/blob/master/sys/symlink.c][Symbolic links]]
+- [[https://github.com/Babkock/learning/-/blob/master/bits.c][Bitwise operations]]
+- [[https://github.com/Babkock/learning/-/blob/master/point/bitfield.c][Bit field]]
 
