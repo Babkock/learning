@@ -28,6 +28,7 @@ int main(void) {
 			printf("Speak: Wrote %d bytes\n", num);
 	}
 
+	close(fd);
 	return 0;
 }
 

@@ -30,6 +30,7 @@ int main(void) {
 	} while (num > 1);
 	putchar('\n');
 
+	close(fd);
 	return 0;
 }
 

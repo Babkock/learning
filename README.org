@@ -34,6 +34,7 @@ Some programs utilize command-line arguments. Remember, if you ever see =int mai
 - [[https://github.com/Babkock/learning/blob/master/time.c][Time calculator]]
 - [[https://github.com/Babkock/learning/blob/master/sys/shell.c][Simple shell]]
 - [[https://github.com/Babkock/learning/-/blob/master/sys/symlink.c][Symbolic links]]
-- [[https://github.com/Babkock/learning/-/blob/master/bits.c][Bitwise operations]]
-- [[https://github.com/Babkock/learning/-/blob/master/point/bitfield.c][Bit field]]
+- [[https://github.com/Babkock/learning/blob/master/bits.c][Bitwise operations]]
+- [[https://github.com/Babkock/learning/blob/master/point/bitfield.c][Bit field]]
 
+Thanks for checking these out.

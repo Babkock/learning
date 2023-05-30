@@ -64,15 +64,20 @@ int main(int argc, char **argv) {
 	if ((n = write(sockfd, buffer, strlen(buffer))) < 0) {
 		fprintf(stderr, "Error writing to socket\n");
 		return 4;
+	} else {
+		printf("Wrote %d bytes\n", n);
 	}
 
 	/* now read server response */
 	bzero(buffer, BUF);
 	if ((n = read(sockfd, buffer, BUF-1)) < 0) {
 		fprintf(stderr, "Error reading from socket\n");
-		return 5;
+		return 4;
+	} else {
+		printf("Read %d bytes\n", n);
 	}
 
+	close(sockfd);
 	printf("Your message: %s", buffer);
 	return 0;
 }
