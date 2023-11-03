@@ -274,6 +274,7 @@ int main(int argc, char *argv[]) {
 		close(childfd);
 	}
 
+	close(parentfd);
 	return 0;
 }
 
