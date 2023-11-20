@@ -14,6 +14,7 @@ int main(int argc, char *argv[]) {
 	if (argc > 1) {
 		ifstream *in = new ifstream[argc];
 		char y;
+		
 		for (int x = 1; x < argc; x++) {
 			in[x-1].open(argv[x]);
 			if (!in[x-1]) {
@@ -22,10 +23,12 @@ int main(int argc, char *argv[]) {
 				delete[] in;
 				return 2;
 			}
+
 			while (in[x-1].get(y))
 				cout.put(y);
 			in[x-1].close();
 		}
+
 		delete[] in;
 	}
 	else if (argc == 1) {
@@ -34,14 +37,17 @@ int main(int argc, char *argv[]) {
 	
 		if (!in) {
 			cerr << "ERROR: '" << argv[1] << "' File not found" << endl;
+			delete in;
 			return 2;
 		}
+
 		char x;
 		while (in->get(x))	// fails on EOF
 			cout.put(x);
 		in->close();
 		delete in;
 	}
+
 	return 0;
 }
 
