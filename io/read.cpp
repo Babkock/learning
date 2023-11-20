@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 			in[x-1].open(argv[x]);
 			if (!in[x-1]) {
 				in[x-1].close();
-				cerr << "ERROR: File not found" << endl;
+				cerr << "ERROR: '" << argv[x] << "' File not found" << endl;
 				delete[] in;
 				return 2;
 			}
@@ -29,17 +29,18 @@ int main(int argc, char *argv[]) {
 		delete[] in;
 	}
 	else if (argc == 1) {
-		ifstream in;
-		in.open(argv[1]);
+		ifstream *in = new ifstream();
+		in->open(argv[1]);
 	
 		if (!in) {
-			cerr << "ERROR: File not found" << endl;
+			cerr << "ERROR: '" << argv[1] << "' File not found" << endl;
 			return 2;
 		}
 		char x;
-		while (in.get(x))	// fails on EOF
+		while (in->get(x))	// fails on EOF
 			cout.put(x);
-		in.close();
+		in->close();
+		delete in;
 	}
 	return 0;
 }

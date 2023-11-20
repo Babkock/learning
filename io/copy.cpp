@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
 	in->open(argv[1]);
 
 	if (!in) {
-		cerr << "ERROR: Input file does not exist" << endl;
+		cerr << "ERROR: Input file '" << argv[1] << "' does not exist" << endl;
 		return 2;
 	}
 

@@ -1,5 +1,5 @@
 /* Job queue with mutex
- * July 10, 2022
+ * July 10, 2022, updated November 2023
  * Compile with:
  * g++ -pthread -std=c++11 mutex.cpp */
 #include <queue>
@@ -14,9 +14,9 @@
 struct job { int num; };
 bool closed = false;
 
-std::deque<job> jobList;
-std::mutex jobMutex;
-std::condition_variable jobCondition;
+std::deque<job> *jobList;
+std::mutex *jobMutex;
+std::condition_variable *jobCondition;
 std::atomic<int> threadsRunning;
 
 /* thread-safe cout */
@@ -37,10 +37,10 @@ std::mutex tcout::mutex;
 void addJobs(void) {
     static int num = 0;
     job current = { num++ };
-    std::unique_lock<std::mutex> lock(jobMutex);
-    jobList.push_back(current);
+    std::unique_lock<std::mutex> lock(*jobMutex);
+    jobList->push_back(current);
 
-    jobCondition.notify_one();
+    jobCondition->notify_one();
     lock.unlock();
 }
 
@@ -50,16 +50,17 @@ void work(int seconds) {
     job current;
     threadsRunning++;
     while (true) {
-        std::unique_lock<std::mutex> lock(jobMutex);
-        if (jobList.empty()) {
+        std::unique_lock<std::mutex> lock(*jobMutex);
+        
+		if (jobList->empty()) {
             threadsRunning--;
-            jobCondition.wait(lock, [] { return !jobList.empty() || closed; });
+            jobCondition->wait(lock, [] { return !jobList->empty() || closed; });
             threadsRunning++;
         }
-        if (jobList.empty())
+        if (jobList->empty())
             break;
-        current = jobList.front();
-        jobList.pop_front();
+        current = jobList->front();
+        jobList->pop_front();
         lock.unlock();
 
         if ((current.num % 2) == 0)
@@ -79,6 +80,7 @@ void work(int seconds) {
 
 int main(int argc, char *argv[]) {
     int res;
+
     if (argc < 2) {
         std::cout << "Number of threads to use (20 max): ";
         std::cin >> res;
@@ -99,6 +101,10 @@ int main(int argc, char *argv[]) {
         return 2;
     }
 
+	jobList = new std::deque<job>();
+	jobMutex = new std::mutex();
+	jobCondition = new std::condition_variable();
+
     std::thread jobThreads[res];
 
     for (int i = 0; i < res; i++) {
@@ -108,13 +114,18 @@ int main(int argc, char *argv[]) {
         addJobs();
     }
     {
-        std::unique_lock<std::mutex> lock(jobMutex);
+        std::unique_lock<std::mutex> lock(*jobMutex);
         closed = true;
-        jobCondition.notify_all();
+        jobCondition->notify_all();
     }
     for (int i = 0; i < res; i++) {
         jobThreads[i].join();
-    }
+	}
+	std::cout << "Finished" << std::endl;
+
+	delete jobCondition;
+	delete jobMutex;
+	delete jobList;
     return 0;
 }
 

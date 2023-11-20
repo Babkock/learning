@@ -56,11 +56,13 @@ jobs:
         cc -Wall -O2 point/linklist.c -o point/linklist
         cc -Wall -O2 point/linkpop.c -o point/linkpop
         cc -Wall -O2 point/linkpush.c -o point/linkpush
+        g++ -Wall -O2 point/list.cpp -o point/list
         cc -Wall -O2 point/malloc.c -o point/malloc
         cc -Wall -O2 point/realloc.c -o point/realloc
         cc -Wall -O2 point/structfunc.c -o point/structfunc
         cc -Wall -O2 point/union.c -o point/union
         cc -Wall -O2 point/hashmap.c -o point/hashmap
+        g++ -Wall -O2 point/hashmap.cpp -o point/hashmap2
         cc -Wall -O2 point/hashtable.c -o point/hashtable
         cc -Wall -O2 sys/daemon.c -o sys/daemon
         cc -Wall -O2 sys/fork.c -o sys/fork
@@ -71,6 +73,7 @@ jobs:
         cc -Wall -O2 sys/speak.c -o sys/speak
         cc -Wall -O2 sys/symlink.c -o sys/symlink
         cc -Wall -O2 sys/tick.c -o sys/tick
+        g++ -Wall -O2 thread/async.cpp -o thread/async
         cc -Wall -O2 thread/condsignal.c -lpthread -o thread/condsignal
         cc -Wall -O2 thread/mutex.c -lpthread -o thread/mutex
         g++ -Wall -O2 -pthread -std=c++11 thread/mutex.cpp -o thread/mutex2
