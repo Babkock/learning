@@ -8,7 +8,7 @@ typedef struct node {
 	struct node *next;
 } node_t;
 
-void print_list(node_t *h) {
+static void print_list(node_t *h) {
 	node_t *current = h;
 
 	while (current != NULL) {
@@ -18,7 +18,7 @@ void print_list(node_t *h) {
 }
 
 /* Push a node to the end of the list with value val */
-void push(node_t *h, int v) {
+static void push(node_t *h, int v) {
 	node_t *current = h;
 	while (current->next != NULL)
 		current = current->next;

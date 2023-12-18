@@ -9,7 +9,7 @@ typedef struct node {
 } node_t;
 
 /* Print the linked list */
-void print_list(node_t *h) {
+static void print_list(node_t *h) {
 	node_t *current;
 
 	for (current = h; current != NULL; current = current->next) {
@@ -18,7 +18,7 @@ void print_list(node_t *h) {
 }
 
 /* New push function, inserts at beginning instead of end */
-int push(node_t **h, int val) {
+static int push(node_t **h, int val) {
 	/* This **h is a double pointer */
 	if (*h == NULL) {
 		return 1;
@@ -38,7 +38,7 @@ int push(node_t **h, int val) {
 }
 
 /* Remove from beginning of list, and return stored value */
-int pop(node_t **h) {
+static int pop(node_t **h) {
 	int ret = -1;
 	node_t *next = NULL;
 

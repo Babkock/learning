@@ -30,15 +30,15 @@ const char *months[] = {
 	"December"
 };
 
-void print_big_date(DateBig *date) {
+static void print_big_date(DateBig *date) {
 	printf("%s %d, %d\n\n", months[(date->month)-1], date->day, date->year);
 }
 
-void print_date(DateSmall *date) {
+static void print_date(DateSmall *date) {
 	printf("%s %d, %d\n\n", months[(date->month)-1], date->day, date->year);
 }
 
-int make_big_date(DateBig *out) {
+static int make_big_date(DateBig *out) {
 	unsigned int m, d, y;
 	printf("Making big date\n");
 	printf("Enter month: ");
@@ -65,7 +65,7 @@ int make_big_date(DateBig *out) {
 	return 0;
 }
 
-int make_date(DateSmall *out) {
+static int make_date(DateSmall *out) {
 	unsigned int m, d, y;
 	printf("Making small date\n");
 	printf("Enter month: ");

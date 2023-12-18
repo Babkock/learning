@@ -6,11 +6,11 @@
 #include <string>
 #include <thread>
 
-void callback(const std::string& data) {
+static void callback(const std::string& data) {
 	std::cout << "Callback called with: " << data << std::endl;
 }
 
-void task(int time) {
+static void task(int time) {
 	std::this_thread::sleep_for(std::chrono::seconds(time));
 	callback("async task done");
 }

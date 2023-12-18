@@ -41,7 +41,7 @@ mime_type types[] = {
 	{".", "text/plain"}
 };
 
-void format_size(char *buf, struct stat *stat) {
+static void format_size(char *buf, struct stat *stat) {
 	bzero(buf, strlen(buf));
 	if (S_ISDIR(stat->st_mode)) {
 		sprintf(buf, "%s", "DIR");
@@ -58,12 +58,12 @@ void format_size(char *buf, struct stat *stat) {
 	}
 }
 
-void error(char *msg) {
+static void error(char *msg) {
 	perror(msg);
 	exit(1);
 }
 
-void cerror(FILE *stream, char *cause, char *errno, char *shortm, char *longm) {
+static void cerror(FILE *stream, char *cause, char *errno, char *shortm, char *longm) {
 	fprintf(stream, "HTTP/1.1 %s %s\n", errno, shortm);
 	fprintf(stream, "Content-Type: text/html\n");
 	fprintf(stream, "\n");
@@ -75,9 +75,11 @@ void cerror(FILE *stream, char *cause, char *errno, char *shortm, char *longm) {
 	fprintf(stream, "<hr color=\"white\"/><em>Web Server</em></body></html>\n");
 }
 
-void serve_file(FILE *stream, struct stat *stat, char *filename) {
+static void serve_file(FILE *stream, struct stat *stat, char *filename) {
 	char *p;
-	char filetype[BUFSIZE];
+	//char filetype[BUFSIZE];
+	char *filetype;
+	filetype = (char *)malloc(BUFSIZE);
 	for (int z = 0; z < sizeof(types); z++) {
 		if (strstr(filename, types[z].extension)) {
 			strcpy(filetype, types[z].type);
@@ -99,9 +101,10 @@ void serve_file(FILE *stream, struct stat *stat, char *filename) {
 	fwrite(p, 1, stat->st_size, stream);
 	munmap(p, stat->st_size);
 	close(fd);
+	free(filetype);
 }
 
-void serve_directory(int cfd, char *filename) {
+static void serve_directory(int cfd, char *filename) {
 	char buf[BBUFSIZE];
 	
 	sprintf(buf, "HTTP/1.1 200 OK\r\n%s%s%s%s%s%s%s%s",

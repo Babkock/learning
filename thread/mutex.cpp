@@ -34,7 +34,7 @@ struct tcout {
 };
 std::mutex tcout::mutex;
 
-void addJobs(void) {
+static void addJobs(void) {
     static int num = 0;
     job current = { num++ };
     std::unique_lock<std::mutex> lock(*jobMutex);
@@ -46,7 +46,7 @@ void addJobs(void) {
 
 /* Pass the parameter by giving another argument
  * to the thread constructor */
-void work(int seconds) {
+static void work(int seconds) {
     job current;
     threadsRunning++;
     while (true) {

@@ -9,7 +9,7 @@ typedef struct {
 	int value;
 } item;
 
-item *linear_search(item *items, size_t size, const char *key) {
+static item *linear_search(item *items, size_t size, const char *key) {
 	for (size_t i = 0; i < size; i++) {
 		if (strcmp(items[i].key, key) == 0) {
 			return &items[i];

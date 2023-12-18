@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 
-void print(int n, const string &str) {
+static void print(int n, const string &str) {
     string msg = to_string(n) + " : " + str;
     cout << msg << endl;
 }
@@ -26,3 +26,4 @@ int main(void) {
         th.join();
     return 0;
 }
+
