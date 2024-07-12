@@ -17,7 +17,7 @@ typedef struct hashTable_t {
 	 * linked list */
 } hashTable;
 
-hashTable *ht_create(unsigned int size) {
+static hashTable *ht_create(unsigned int size) {
 	hashTable *ht;
 	if (size < 1)
 		return NULL;
@@ -39,7 +39,7 @@ hashTable *ht_create(unsigned int size) {
 }
 
 /* free the items in a hashTable. free each individual row and column */
-void ht_free(hashTable *ht) {
+static void ht_free(hashTable *ht) {
 	list *tmp;
 
 	if (!ht)
@@ -62,7 +62,7 @@ void ht_free(hashTable *ht) {
 	free(ht);
 }
 
-unsigned int hash(const char *key, unsigned int size) {
+static unsigned int hash(const char *key, unsigned int size) {
 	unsigned int hash = 0, i = 0;
 
 	while (key && key[i]) {
@@ -72,53 +72,7 @@ unsigned int hash(const char *key, unsigned int size) {
 	return hash;
 }
 
-int ht_put(hashTable *ht, const char *key, const char *value) {
-	list *node;
-
-	if (!ht) {
-		fprintf(stderr, "Hashtable does not exist\n");
-		return 1;
-	}
-
-	if (!(node = malloc(sizeof(list)))) {
-		fprintf(stderr, "Could not allocate node\n");
-		return 1;
-	}
-
-	node->key = strdup(key);
-	node->value = strdup(value);
-	node_handle(ht, node);
-
-	return 0;
-}
-
-char *ht_get(hashTable *ht, const char *key) {
-	char *key_cp;
-	unsigned int i;
-	list *tmp;
-
-	if (!ht) {
-		return NULL;
-	}
-	key_cp = strdup(key);
-	i = hash(key, ht->size);
-	tmp = ht->array[i];
-
-	while (tmp != NULL) {
-		if (strcmp(tmp->key, key_cp) == 0) {
-			break;
-		}
-		tmp = tmp->next;
-	}
-	free(key_cp);
-
-	if (tmp == NULL) {
-		return NULL;
-	}
-	return tmp->value;
-}
-
-void node_handle(hashTable *ht, list *node) {
+static void node_handle(hashTable *ht, list *node) {
 	unsigned int i = hash(node->key, ht->size);
 	list *tmp = ht->array[i];
 
@@ -145,6 +99,52 @@ void node_handle(hashTable *ht, list *node) {
 		node->next = NULL;
 		ht->array[i] = node;
 	}
+}
+
+static int ht_put(hashTable *ht, const char *key, const char *value) {
+	list *node;
+
+	if (!ht) {
+		fprintf(stderr, "Hashtable does not exist\n");
+		return 1;
+	}
+
+	if (!(node = malloc(sizeof(list)))) {
+		fprintf(stderr, "Could not allocate node\n");
+		return 1;
+	}
+
+	node->key = strdup(key);
+	node->value = strdup(value);
+	node_handle(ht, node);
+
+	return 0;
+}
+
+static char *ht_get(hashTable *ht, const char *key) {
+	char *key_cp;
+	unsigned int i;
+	list *tmp;
+
+	if (!ht) {
+		return NULL;
+	}
+	key_cp = strdup(key);
+	i = hash(key, ht->size);
+	tmp = ht->array[i];
+
+	while (tmp != NULL) {
+		if (strcmp(tmp->key, key_cp) == 0) {
+			break;
+		}
+		tmp = tmp->next;
+	}
+	free(key_cp);
+
+	if (tmp == NULL) {
+		return NULL;
+	}
+	return tmp->value;
 }
 
 int main(void) {
