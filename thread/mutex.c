@@ -19,6 +19,7 @@ static void *handler(void *arg) {
 	sleep(2);
 	printf("Job %d has finished\n", counter);
 	pthread_mutex_unlock(lock);
+	pthread_exit(NULL);
 	return NULL;
 }
 
@@ -49,6 +50,7 @@ int main(void) {
 		pthread_join(tid[i], NULL);
 	}
 
+	pthread_exit(NULL);
 	pthread_mutex_destroy(lock);
 	free(lock);
 	free(tid);

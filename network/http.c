@@ -77,9 +77,8 @@ static void cerror(FILE *stream, char *cause, char *errno, char *shortm, char *l
 
 static void serve_file(FILE *stream, struct stat *stat, char *filename) {
 	char *p;
-	//char filetype[BUFSIZE];
 	char *filetype;
-	filetype = (char *)malloc(BUFSIZE);
+	filetype = (char *)malloc((sizeof(char) * BUFSIZE));
 	for (int z = 0; z < sizeof(types); z++) {
 		if (strstr(filename, types[z].extension)) {
 			strcpy(filetype, types[z].type);
@@ -160,7 +159,7 @@ static void serve_directory(int cfd, char *filename) {
 	}
 	sprintf(buf, "</tbody></table></body></html>");
 	write(cfd, buf, strlen(buf));
-	//
+	
 	free(buf);
 	buf = NULL;
 
