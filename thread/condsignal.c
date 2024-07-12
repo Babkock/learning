@@ -14,12 +14,48 @@ int done = 0;
 
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
-void *entry(void *id);
+
+static void *entry(void *id) {
+	const int realId = (long)id;
+	int i;
+
+	for (i = 0; i < 5; i++) {
+		printf("Thread %d: working %d / 5\n", realId, i);
+		sleep(1);
+	}
+
+	/* acquire mutex from main(), then release back to main() after
+	 * condition is signalled */
+	if (pthread_mutex_lock(&lock) != 0) {
+		fprintf(stderr, "Thread %d could not lock mutex, error %d\n", realId, errno);
+		abort();
+	}
+
+	/* thread is finished */
+	done++;
+	printf("Thread %d is done. %d threads done. Signalling...\n", realId, done);
+
+	/* wake the sleeping main thread */
+	if (pthread_cond_signal(&cond) != 0) {
+		fprintf(stderr, "Thread %d could not wake sleeping main, error %d\n", realId, errno);
+		abort();
+	}
+	
+	if (pthread_mutex_unlock(&lock) != 0) {
+		fprintf(stderr, "Thread %d could not unlock mutex, error %d\n", realId, errno);
+		abort();
+	}
+
+	pthread_exit(NULL);
+	return NULL;
+}
 
 int main(void) {
+	int t;
 	printf("Main thread starting\n");
 	pthread_t *threads = (pthread_t *)malloc(sizeof(pthread_t) * THREADS);
-	for (int t = 0; t < THREADS; t++)
+	
+	for (t = 0; t < THREADS; t++)
 		pthread_create(&threads[t], NULL, entry, (void *)(long)t);
 
 	if (pthread_mutex_init(&lock, NULL) != 0) {
@@ -52,41 +88,10 @@ int main(void) {
 		free(threads);
 		return 1;
 	}
+
+	pthread_exit(NULL);
 	pthread_mutex_destroy(&lock);
 	free(threads);
 	return 0;
-}
-
-void *entry(void *id) {
-	const int realId = (long)id;
-
-	for (int i = 0; i < 5; i++) {
-		printf("Thread %d: working %d / 5\n", realId, i);
-		sleep(1);
-	}
-
-	/* acquire mutex from main(), then release back to main() after
-	 * condition is signalled */
-	if (pthread_mutex_lock(&lock) != 0) {
-		fprintf(stderr, "Thread %d could not lock mutex, error %d\n", realId, errno);
-		abort();
-	}
-
-	/* thread is finished */
-	done++;
-	printf("Thread %d is done. %d threads done. Signalling...\n", realId, done);
-
-	/* wake the sleeping main thread */
-	if (pthread_cond_signal(&cond) != 0) {
-		fprintf(stderr, "Thread %d could not wake sleeping main, error %d\n", realId, errno);
-		abort();
-	}
-	
-	if (pthread_mutex_unlock(&lock) != 0) {
-		fprintf(stderr, "Thread %d could not unlock mutex, error %d\n", realId, errno);
-		abort();
-	}
-
-	return NULL;
 }
 

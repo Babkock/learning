@@ -105,7 +105,9 @@ static void serve_file(FILE *stream, struct stat *stat, char *filename) {
 }
 
 static void serve_directory(int cfd, char *filename) {
-	char buf[BBUFSIZE];
+	//char buf[BBUFSIZE];
+	char *buf;
+	buf = (char *)malloc((sizeof(char) * BBUFSIZE));
 	
 	sprintf(buf, "HTTP/1.1 200 OK\r\n%s%s%s%s%s%s%s%s",
 		"Server: My Web Server\r\n",
@@ -124,9 +126,13 @@ static void serve_directory(int cfd, char *filename) {
 	DIR *d;
 
 	if ((fd = open(filename, O_RDONLY, 0)) < 0) {
+		free(buf);
+		buf = NULL;
 		error("Could not open directory\n");
 	}
 	if (write(cfd, buf, strlen(buf)) < 0) {
+		free(buf);
+		buf = NULL;
 		error("Could not write to buffer\n");
 	}
 	d = fdopendir(fd);
@@ -154,6 +160,9 @@ static void serve_directory(int cfd, char *filename) {
 	}
 	sprintf(buf, "</tbody></table></body></html>");
 	write(cfd, buf, strlen(buf));
+	//
+	free(buf);
+	buf = NULL;
 
 	close(fd);
 	closedir(d);
