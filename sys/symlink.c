@@ -18,10 +18,11 @@ int main(int argc, char *argv[]) {
 			fprintf(stderr, "ERROR: Symbolic link loop\n");
 		else
 			fprintf(stderr, "ERROR: Could not make symbolic link\n");
+		return 2;
 	}
 	else {
 		printf("Created symbolic link\n");
+		return 0;
 	}
-	return 0;
 }
 

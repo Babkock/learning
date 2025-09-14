@@ -2,6 +2,7 @@
  * with binary and hex output
  * July 3, 2022 */
 #include <stdio.h>
+// test
 
 void bits(size_t const size, void const * const ptr) {
 	unsigned char *b = (unsigned char *)ptr;
